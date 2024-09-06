@@ -1,0 +1,217 @@
+body {
+  background-color: #34b59e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+}
+
+/* Estilos para el top bar */
+.top-bar {
+  background-color: #fefefe;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.top-bar .title {
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: 'Cabin', sans-serif;
+  color: #ffce00;
+}
+
+.top-bar .top-buttons {
+  display: flex;
+}
+
+.top-bar .top-buttons button {
+  background-color: transparent;
+  color: #828282;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.top-bar .top-buttons button:hover {
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.card {
+  background-color: white;
+  border-radius: 24px;
+  padding: 20px;
+  position: relative;
+  width: 300px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card::before {
+  content: "";
+  display: block;
+  padding-top: 133.33%;
+}
+
+.card-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el encabezado de la tarjeta */
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #1f7a6a;
+}
+
+.card-text {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 100;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #3a3a3a;
+}
+
+.card-text .question {
+  background-color: #f9f9f9;
+  border: 2px solid #bcbcbc; 
+  border-radius: 16px;
+  padding: 20px; 
+  width: 90%; 
+  box-sizing: border-box; 
+  margin-bottom: 5px; 
+}
+
+.card-text .answer {
+  background-color: #fffcd4; 
+  border: 2px solid #ffde00; 
+  border-radius: 16px; 
+  padding: 20px; 
+  width: 90%; 
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.card-buttons { 
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.card-buttons button {
+  background-color: #34b59e69;
+  color: #1f7a6a;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+  font-family: 'Cabin', sans-serif;
+  font-weight: bolder;
+}
+
+button:hover {
+  background-color: #fcd22154;
+  color:#f0c200
+}
+
+#cardCount {
+  font-size: 1rem;
+  font-weight: 700;
+
+}
+
+#cardLabel {
+  font-size: 1rem; 
+  font-weight: 700;
+}
+
+/* Estilos para el botón Memorize */
+#memorizeButton {
+  background-color: #ececec; /* Gris para el relleno */
+  color: #cdcdcd; /* Gris oscuro para el texto */
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+#memorizeButton:hover {
+  background-color: #c4c4c4; /* Gris más oscuro al pasar el ratón */
+}
+
+/* No se necesita la clase 'active' en el CSS */
+
+#fileInput {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.memorize-button-container {
+  width: 340px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px; 
+}
+
+.file-button-container {
+  display: none;
+}
+
+#selectDeckMessage {
+  font-family: 'Cabin', sans-serif;
+  color: #ccc; /* Gris claro */
+}

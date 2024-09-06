@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SharpenUp</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="title">SharpenUp</div>
+    <div class="top-buttons">
+      <button id="decksButton">Decks</button>
+      <button>Help</button>
+      <button>About</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="memorize-button-container">
+      <button id="memorizeButton">Both Sides</button>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-header">
+          <div id="cardLabel"></div>
+          <div id="cardCount"></div>
+        </div>
+        <div class="card-text" id="cardText">
+          <span id="selectDeckMessage">Select your Deck to study...</span>
+        </div>
+        <div class="card-buttons">
+          <button onclick="previousCard(); playSound()">Back</button>
+          <button onclick="flipCard(); playSound()">Flip</button>
+          <button onclick="nextCard(); playSound()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="fileInput" accept=".txt" style="display: none;">
+
+  <audio id="buttonSound" src="C:\Users\User\Documents\Juan Jose\Flashcards\Flashcards\analog-appliance-button.mp3"></audio>
+
+  <script>
+    let cards = [];
+    let currentCard = 0;
+    let showingFront = true;
+    let shuffledCards = [];
+    let cardsSeen = 0;
+    let studyMode = false;
+
+    const fileInput = document.getElementById('fileInput');
+    const decksButton = document.getElementById('decksButton');
+    const cardCountDisplay = document.getElementById('cardCount');
+    const memorizeButton = document.getElementById('memorizeButton');
+    const cardText = document.getElementById('cardText');
+    const cardLabel = document.getElementById('cardLabel');
+    const backButton = document.querySelector('.card-buttons button:first-child');
+    const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
+    const nextButton = document.querySelector('.card-buttons button:last-child');
+    const selectDeckMessage = document.getElementById('selectDeckMessage');
+
+    decksButton.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const lines = text.split('\n');
+        lines.forEach(line => {
+          const [front, back] = line.split('|');
+          if (front && back) {
+            cards.push({ front: front.trim(), back: back.trim() });
+          }
+        });
+
+        shuffledCards = shuffle(cards);
+        cardsSeen = 1;
+        showCard();
+        updateCardCount();
+
+        selectDeckMessage.style.display = 'none';
+      }
+
+      reader.readAsText(file);
+    });
+
+    // Simplificando el manejo del botón "Memorize"
+    memorizeButton.addEventListener('click', () => {
+      studyMode = !studyMode; 
+
+      // Actualiza el texto y el color del botón
+      memorizeButton.textContent = studyMode ? 'Both Sides' : 'Both Sides';
+      memorizeButton.style.color = studyMode ? '#ff9e00' : '#212121'; 
+
+      if (studyMode) {
+        currentCard = 0;
+        showCard();
+        updateCardCount();
+
+        backButton.disabled = false;
+        nextButton.disabled = false;
+        flipButton.disabled = true;
+
+        cardLabel.style.display = 'none';
+        cardCountDisplay.style.marginLeft = 'auto';
+      } else {
+        cardsSeen = 1;
+        showingFront = true;
+        showCard();
+        updateCardCount();
+
+        backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
+        nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
+        flipButton.disabled = false; 
+
+        // Restaurar el color de fondo al gris original
+        memorizeButton.style.backgroundColor = '#ececec'; 
+        memorizeButton.style.color = '#cdcdcd'; 
+
+        cardLabel.style.display = 'block';
+        cardCountDisplay.style.marginLeft = '0'; 
+      }
+    });
+
+    function showCard() {
+      if (studyMode) {
+        if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
+          const card = shuffledCards[cardsSeen - 1];
+          cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
+        } else {
+          cardText.textContent = " ";
+        }
+      } else {
+        if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
+          const card = shuffledCards[cardsSeen - 1];
+          cardText.textContent = showingFront ? card.front : card.back;
+          cardLabel.textContent = showingFront ? "Question" : "Answer";
+        } else {
+          cardText.textContent = " ";
+          cardLabel.textContent = "";
+        }
+      }
+    }
+
+    function flipCard() {
+      if (!studyMode) {
+        showingFront = !showingFront;
+        showCard();
+      }
+    }
+
+    function nextCard() {
+      if (studyMode) {
+        cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
+        showCard();
+        updateCardCount();
+        nextButton.disabled = cardsSeen === shuffledCards.length;
+      } else {
+        cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
+        showingFront = true;
+        showCard();
+        updateCardCount();
+        nextButton.disabled = cardsSeen === shuffledCards.length;
+        backButton.disabled = false;
+      }
+    }
+
+    function previousCard() {
+      if (studyMode) {
+        cardsSeen = Math.max(cardsSeen - 1, 1);
+        showCard();
+        updateCardCount();
+        backButton.disabled = cardsSeen === 1;
+      } else {
+        cardsSeen = Math.max(cardsSeen - 1, 1);
+        showingFront = true;
+        showCard();
+        updateCardCount();
+        backButton.disabled = cardsSeen === 1;
+        nextButton.disabled = false;
+      }
+    }
+
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]
+        ];
+      }
+      return array;
+    }
+
+    function updateCardCount() {
+      cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
+    }
+
+    function playSound() {
+      const buttonSound = document.getElementById('buttonSound');
+      buttonSound.currentTime = 0;
+      buttonSound.volume = 0.6;
+      buttonSound.play();
+    }
+  </script>
+</body>
+
+</html>
