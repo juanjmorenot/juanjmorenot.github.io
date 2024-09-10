@@ -77,8 +77,8 @@
 
     // Función para cargar un deck desde un archivo .txt
     function loadDeck(filename) {
-      // Construir la ruta relativa correcta
-      const filePath = filename; 
+      // Construir la ruta relativa correcta incluyendo la carpeta "decks"
+      const filePath = `decks/${filename}`;
 
       fetch(filePath)
         .then(response => response.text())
@@ -107,7 +107,7 @@
 
     // Simplificando el manejo del botón "Memorize"
     memorizeButton.addEventListener('click', () => {
-      studyMode = !studyMode; 
+      studyMode = !studyMode;
 
       // Actualiza el texto y el color del botón
       memorizeButton.textContent = studyMode ? 'Both Sides' : 'Both Sides';
