@@ -15,10 +15,10 @@
     <div class="top-buttons">
       <select id="decksDropdown">
         <option value="">Select Deck</option>
-        <option value="cards01.txt">cards01.txt</option>
-        <option value="cards02.txt">cards02.txt</option>
-        <option value="cards03.txt">cards03.txt</option>
-        <option value="KPIs.txt">KPIs.txt</option>
+        <option value="decks/cards01.txt">cards01.txt</option>
+        <option value="decks/cards02.txt">cards02.txt</option>
+        <option value="decks/cards03.txt">cards03.txt</option>
+        <option value="decks/KPIs.txt">KPIs.txt</option>
       </select>
       <button>Help</button>
       <button>About</button>
@@ -77,10 +77,7 @@
 
     // Función para cargar un deck desde un archivo .txt
     function loadDeck(filename) {
-      // Construir la ruta relativa correcta incluyendo la carpeta "decks"
-      const filePath = `decks/${filename}`;
-
-      fetch(filePath)
+      fetch(filename)
         .then(response => response.text())
         .then(text => {
           // Reiniciar variables al cargar un nuevo mazo
