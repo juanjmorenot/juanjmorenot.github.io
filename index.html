@@ -83,9 +83,11 @@
 
           shuffledCards = shuffle(cards);
           cardsSeen = 1;
-          showCard();
           updateCardCount();
           selectDeckMessage.style.display = 'none';
+
+          // Mostrar la primera tarjeta del nuevo mazo
+          showCard(); 
         })
         .catch(error => console.error('Error loading deck:', error));
     }
@@ -207,7 +209,6 @@
       return array;
     }
 
-    // Función corregida para actualizar el contador de tarjetas
     function updateCardCount() {
       cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + cards.length;
     }
