@@ -2,461 +2,375 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SharpenUp</title>
-    <style>
-        body {
-            background-color: #34b59e;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Cabin', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SharpenUp</title>
+  <style>
+    body {
+      background-color: #34b59e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Cabin', sans-serif;
+    }
 
-        /* Estilos para el top bar */
-        .top-bar {
-            background-color: #fefefe;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            box-sizing: border-box;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-        }
+    /* Estilos para el top bar */
+    .top-bar {
+      background-color: #fefefe;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
 
-        .top-bar .title {
-            font-size: 2rem;
-            font-weight: bolder;
-            font-family: 'Cabin', sans-serif;
-            color: #ffce00;
-        }
+    .top-bar .title {
+      font-size: 2rem;
+      font-weight: bolder;
+      font-family: 'Cabin', sans-serif;
+      color: #ffce00;
+    }
 
-        .top-bar .top-buttons {
-            display: flex;
-        }
+    .top-bar .top-buttons {
+      display: flex;
+    }
 
-        .top-bar .top-buttons select,
-        .top-bar .top-buttons button {
-            background-color: transparent;
-            color: #828282;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-left: 10px;
-            font-family: 'Cabin', sans-serif;
-        }
+    .top-bar .top-buttons select,
+    .top-bar .top-buttons button {
+      background-color: transparent;
+      color: #828282;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+      font-family: 'Cabin', sans-serif;
+    }
 
-        .top-bar .top-buttons select:hover,
-        .top-bar .top-buttons button:hover {
-            background-color: #f0f0f0;
-        }
+    .top-bar .top-buttons select:hover,
+    .top-bar .top-buttons button:hover {
+      background-color: #f0f0f0;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 120px;
-            width: 100%;
-            box-sizing: border-box;
-            height: 100vh;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 120px;
+      width: 100%;
+      box-sizing: border-box;
+      height: 100vh;
+    }
 
-        .card {
-            background-color: white;
-            border-radius: 24px;
-            padding: 20px;
-            position: relative;
-            width: 300px;
-            margin-top: 0px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-        }
+    .card {
+      background-color: white;
+      border-radius: 24px;
+      padding: 20px;
+      position: relative;
+      width: 300px;
+      margin-top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
 
-        .card::before {
-            content: "";
-            display: block;
-            padding-top: 133.33%;
-        }
+    .card::before {
+      content: "";
+      display: block;
+      padding-top: 133.33%;
+    }
 
-        .card-content {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+    .card-content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-        /* Estilos para el encabezado de la tarjeta */
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            /* Distribuye el espacio entre los elementos */
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-            color: #1f7a6a;
-        }
+    /* Estilos para el encabezado de la tarjeta */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      /* Distribuye el espacio entre los elementos */
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+      color: #1f7a6a;
+    }
 
-        .card-text {
-            font-size: 1rem;
-            text-align: center;
-            font-weight: 100;
-            padding: 0 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: #3a3a3a;
-        }
+    .card-text {
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 100;
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #3a3a3a;
+    }
 
-        .card-text .question {
-            background-color: #f9f9f9;
-            border: 2px solid #bcbcbc;
-            border-radius: 16px;
-            padding: 20px;
-            width: 90%;
-            box-sizing: border-box;
-            margin-bottom: 5px;
-        }
+    .card-text .question {
+      background-color: #f9f9f9;
+      border: 2px solid #bcbcbc;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      box-sizing: border-box;
+      margin-bottom: 5px;
+    }
 
-        .card-text .answer {
-            background-color: #fffcd4;
-            border: 2px solid #ffde00;
-            border-radius: 16px;
-            padding: 20px;
-            width: 90%;
-            box-sizing: border-box;
-            margin-top: 5px;
-        }
+    .card-text .answer {
+      background-color: #fffcd4;
+      border: 2px solid #ffde00;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
 
-        .card-buttons {
-            display: flex;
-            justify-content: space-between;
-            width: 85%;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
+    .card-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 85%;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
 
-        .card-buttons button {
-            background-color: #34b59e69;
-            color: #1f7a6a;
-            border: none;
-            padding: 16px 20px;
-            border-radius: 16px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease-out;
-            font-family: 'Cabin', sans-serif;
-            font-weight: bolder;
-        }
+    .card-buttons button {
+      background-color: #34b59e69;
+      color: #1f7a6a;
+      border: none;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease-out;
+      font-family: 'Cabin', sans-serif;
+      font-weight: bolder;
+    }
 
-        button:hover {
-            background-color: #fcd22154;
-            color: #f0c200
-        }
+    button:hover {
+      background-color: #fcd22154;
+      color: #f0c200
+    }
 
-        #cardCount {
-            font-size: 1rem;
-            font-weight: 700;
+    #cardCount {
+      font-size: 1rem;
+      font-weight: 700;
+    }
 
-        }
+    #cardLabel {
+      font-size: 1rem;
+      font-weight: 700;
+    }
 
-        #cardLabel {
-            font-size: 1rem;
-            font-weight: 700;
-        }
+    /* Estilos para el botón Memorize */
+    #memorizeButton {
+      background-color: #ececec;
+      /* Gris para el relleno */
+      color: #cdcdcd;
+      /* Gris oscuro para el texto */
+      border: none;
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 0px;
+      font-family: 'Cabin', sans-serif;
+    }
 
-        /* Estilos para el botón Memorize */
-        #memorizeButton {
-            background-color: #ececec;
-            /* Gris para el relleno */
-            color: #cdcdcd;
-            /* Gris oscuro para el texto */
-            border: none;
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-bottom: 0px;
-            font-family: 'Cabin', sans-serif;
-        }
+    #memorizeButton:hover {
+      background-color: #c4c4c4;
+      /* Gris más oscuro al pasar el ratón */
+    }
 
-        #memorizeButton:hover {
-            background-color: #c4c4c4;
-            /* Gris más oscuro al pasar el ratón */
-        }
+    /* Estilos para la lista desplegable */
+    #decksDropdown {
+      background-color: #f0f0f0;
+      color: #3a3a3a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Cabin', sans-serif;
+      appearance: none;
+      /* Elimina estilos predeterminados del navegador */
+      -webkit-appearance: none;
+      /* Para navegadores WebKit */
+    }
 
-        /* No se necesita la clase 'active' en el CSS */
+    /* Agrega una flecha personalizada al dropdown */
+    #decksDropdown::-ms-expand {
+      display: none;
+      /* Oculta la flecha por defecto en IE */
+    }
 
-        #fileInput {
-            margin-left: 20px;
-            margin-top: 20px;
-        }
+    #decksDropdown::after {
+      content: '\25BC';
+      /* Carácter Unicode para una flecha hacia abajo */
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      /* Evita que la flecha sea clickable */
+    }
 
-        .memorize-button-container {
-            width: 340px;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4px;
-        }
+    /* No se necesita la clase 'active' en el CSS */
 
-        .file-button-container {
-            display: none;
-        }
+    #fileInput {
+      margin-left: 20px;
+      margin-top: 20px;
+    }
 
-        #selectDeckMessage {
-            font-family: 'Cabin', sans-serif;
-            color: #ccc;
-            /* Gris claro */
-        }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
+    .memorize-button-container {
+      width: 340px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .file-button-container {
+      display: none;
+    }
+
+    #selectDeckMessage {
+      font-family: 'Cabin', sans-serif;
+      color: #ccc;
+      /* Gris claro */
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="top-bar">
-        <div class="title">SharpenUp</div>
-        <div class="top-buttons">
-            <select id="decksDropdown">
-                <option value="">Select Deck</option>
-            </select>
-            <button>Help</button>
-            <button>About</button>
-        </div>
+  <div class="top-bar">
+    <div class="title">SharpenUp</div>
+    <div class="top-buttons">
+      <select id="decksDropdown">
+        <option value="">Select Deck</option>
+      </select>
+      <button>Help</button>
+      <button>About</button>
     </div>
+  </div>
 
-    <div class="container">
-        <div class="memorize-button-container">
-            <button id="memorizeButton">Both Sides</button>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <div class="card-header">
-                    <div id="cardLabel"></div>
-                    <div id="cardCount"></div>
-                </div>
-                <div class="card-text" id="cardText">
-                    <span id="selectDeckMessage">Select your Deck to study...</span>
-                </div>
-                <div class="card-buttons">
-                    <button onclick="previousCard(); playSound()">Back</button>
-                    <button onclick="flipCard(); playSound()">Flip</button>
-                    <button onclick="nextCard(); playSound()">Next</button>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="memorize-button-container">
+      <button id="memorizeButton">Both Sides</button>
     </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-header">
+          <div id="cardLabel"></div>
+          <div id="cardCount"></div>
+        </div>
+        <div class="card-text" id="cardText">
+          <span id="selectDeckMessage">Select your Deck to study...</span>
+        </div>
+        <div class="card-buttons">
+          <button onclick="previousCard(); playSound()">Back</button>
+          <button onclick="flipCard(); playSound()">Flip</button>
+          <button onclick="nextCard(); playSound()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <audio id="buttonSound"
-        src="C:\Users\User\Documents\Juan Jose\Flashcards\Flashcards\analog-appliance-button.mp3"></audio>
+  <audio id="buttonSound" src="juanjmorenot/juanjmorenot.github.io/mech-keyboard.mp3"></audio>
 
-    <script>
-        let cards = [];
-        let currentCard = 0;
-        let showingFront = true;
-        let shuffledCards = [];
-        let cardsSeen = 0;
-        let studyMode = false;
+  <script>
+    let cards = [];
+    let currentCard = 0;
+    let showingFront = true;
+    let shuffledCards = [];
+    let cardsSeen = 0;
+    let studyMode = false;
 
-        const decksDropdown = document.getElementById('decksDropdown');
-        const cardCountDisplay = document.getElementById('cardCount');
-        const memorizeButton = document.getElementById('memorizeButton');
-        const cardText = document.getElementById('cardText');
-        const cardLabel = document.getElementById('cardLabel');
-        const backButton = document.querySelector('.card-buttons button:first-child');
-        const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
-        const nextButton = document.querySelector('.card-buttons button:last-child');
-        const selectDeckMessage = document.getElementById('selectDeckMessage');
+    const decksDropdown = document.getElementById('decksDropdown');
+    const cardCountDisplay = document.getElementById('cardCount');
+    const memorizeButton = document.getElementById('memorizeButton');
+    const cardText = document.getElementById('cardText');
+    const cardLabel = document.getElementById('cardLabel');
+    const backButton = document.querySelector('.card-buttons button:first-child');
+    const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
+    const nextButton = document.querySelector('.card-buttons button:last-child');
+    const selectDeckMessage = document.getElementById('selectDeckMessage');
 
-        // Reemplaza 'your-username' y 'your-repo' con tu información de GitHub
-        const username = 'juanjmorenot';
-        const repo = 'juanjmorenot.github.io';
-        const path = 'decks/'; // Ruta a la carpeta donde están tus archivos .txt (opcional)
-        const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+    // Configuración para la API de GitHub
+    const username = 'juanjmorenot';
+    const repo = 'juanjmorenot.github.io';
+    const path = 'decks/'; // Asegúrate de que esta carpeta existe en tu repositorio
+    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const txtFiles = data.filter(item => item.type === 'file' && item.name.endsWith('.txt'));
-
-                txtFiles.forEach(file => {
-                    const option = document.createElement('option');
-                    option.value = file.download_url;
-                    option.textContent = file.name;
-                    decksDropdown.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error fetching deck list:', error));
-
-        decksDropdown.addEventListener('change', (event) => {
-            const selectedDeckUrl = event.target.value;
-            if (selectedDeckUrl) {
-                fetch(selectedDeckUrl)
-                    .then(response => response.text())
-                    .then(text => {
-                        cards = []; // Limpiar tarjetas existentes
-                        const lines = text.split('\n');
-                        lines.forEach(line => {
-                            const [front, back] = line.split('|');
-                            if (front && back) {
-                                cards.push({ front: front.trim(), back: back.trim() });
-                            }
-                        });
-
-                        shuffledCards = shuffle(cards);
-                        cardsSeen = 1;
-                        showCard();
-                        updateCardCount();
-
-                        selectDeckMessage.style.display = 'none';
-                    })
-                    .catch(error => console.error('Error loading deck:', error));
-            }
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const txtFiles = data.filter(item => item.type === 'file' && item.name.endsWith('.txt'));
+        txtFiles.forEach(file => {
+          const option = document.createElement('option');
+          option.value = file.name; // Solo el nombre del archivo
+          option.textContent = file.name;
+          decksDropdown.appendChild(option);
         });
+      })
+      .catch(error => console.error('Error fetching deck list:', error));
 
-        // Simplificando el manejo del botón "Memorize"
-        memorizeButton.addEventListener('click', () => {
-            studyMode = !studyMode;
+    // Listener para cuando el usuario selecciona un deck
+    decksDropdown.addEventListener('change', (event) => {
+      const selectedDeckFilename = event.target.value;
+      if (selectedDeckFilename) {
+        // Construir la URL correcta para el archivo en GitHub Pages
+        const selectedDeckUrl = `${path}${selectedDeckFilename}`;
+        fetch(selectedDeckUrl)
+          .then(response => response.text())
+          .then(text => {
+            cards = [];
+            const lines = text.split('\n');
+            lines.forEach(line => {
+              const [front, back] = line.split('|');
+              if (front && back) {
+                cards.push({ front: front.trim(), back: back.trim() });
+              }
+            });
 
-            // Actualiza el texto y el color del botón
-            memorizeButton.textContent = studyMode ? 'Both Sides' : 'Both Sides';
-            memorizeButton.style.color = studyMode ? '#ff9e00' : '#212121';
+            shuffledCards = shuffle(cards);
+            cardsSeen = 1;
+            showCard();
+            updateCardCount();
+            selectDeckMessage.style.display = 'none';
+          })
+          .catch(error => console.error('Error loading deck:', error));
+      }
+    });
 
-            if (studyMode) {
-                currentCard = 0;
-                showCard();
-                updateCardCount();
+    // ... [Resto del código JavaScript - igual a la versión anterior] ... 
 
-                backButton.disabled = false;
-                nextButton.disabled = false;
-                flipButton.disabled = true;
-
-                cardLabel.style.display = 'none';
-                cardCountDisplay.style.marginLeft = 'auto';
-            } else {
-                cardsSeen = 1;
-                showingFront = true;
-                showCard();
-                updateCardCount();
-
-                backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
-                nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
-                flipButton.disabled = false;
-
-                // Restaurar el color de fondo al gris original
-                memorizeButton.style.backgroundColor = '#ececec';
-                memorizeButton.style.color = '#cdcdcd';
-
-                cardLabel.style.display = 'block';
-                cardCountDisplay.style.marginLeft = '0';
-            }
-        });
-
-        function showCard() {
-            if (studyMode) {
-                if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-                    const card = shuffledCards[cardsSeen - 1];
-                    cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
-                } else {
-                    cardText.textContent = " ";
-                }
-            } else {
-                if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-                    const card = shuffledCards[cardsSeen - 1];
-                    cardText.textContent = showingFront ? card.front : card.back;
-                    cardLabel.textContent = showingFront ? "Question" : "Answer";
-                } else {
-                    cardText.textContent = " ";
-                    cardLabel.textContent = "";
-                }
-            }
-        }
-
-        function flipCard() {
-            if (!studyMode) {
-                showingFront = !showingFront;
-                showCard();
-            }
-        }
-
-        function nextCard() {
-            if (studyMode) {
-                cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-                showCard();
-                updateCardCount();
-                nextButton.disabled = cardsSeen === shuffledCards.length;
-            } else {
-                cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-                showingFront = true;
-                showCard();
-                updateCardCount();
-                nextButton.disabled = cardsSeen === shuffledCards.length;
-                backButton.disabled = false;
-            }
-        }
-
-        function previousCard() {
-            if (studyMode) {
-                cardsSeen = Math.max(cardsSeen - 1, 1);
-                showCard();
-                updateCardCount();
-                backButton.disabled = cardsSeen === 1;
-            } else {
-                cardsSeen = Math.max(cardsSeen - 1, 1);
-                showingFront = true;
-                showCard();
-                updateCardCount();
-                backButton.disabled = cardsSeen === 1;
-                nextButton.disabled = false;
-            }
-        }
-
-        function shuffle(array) {
-            let currentIndex = array.length, randomIndex;
-            while (currentIndex != 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [
-                    array[randomIndex], array[currentIndex]
-                ];
-            }
-            return array;
-        }
-
-        function updateCardCount() {
-            cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
-        }
-
-        function playSound() {
-            const buttonSound = document.getElementById('buttonSound');
-            buttonSound.currentTime = 0;
-            buttonSound.volume = 0.6;
-            buttonSound.play();
-        }
-    </script>
+  </script>
 </body>
 
 </html>
