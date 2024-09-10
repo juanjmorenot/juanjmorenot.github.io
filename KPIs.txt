@@ -1,4 +1,4 @@
-Margen Bruto|(Ingresos - Costo de los Bienes Vendidos) / Ingresos
+Margen Bruto|(Ingresos - Costo de los Bienes Vendidos) / Ingresossss
 Margen Operativo|(Ingresos - Costo de los Bienes Vendidos - Gastos Operativos) / Ingresos
 Margen Neto|Utilidad Neta / Ingresos
 Retorno sobre Activos (ROA)|Utilidad Neta / Activos Totales
