@@ -15,6 +15,10 @@
     <div class="top-buttons">
       <select id="decksDropdown">
         <option value="">Select Deck</option>
+        <option value="cards01.txt">cards01.txt</option>
+        <option value="cards02.txt">cards02.txt</option>
+        <option value="cards03.txt">cards03.txt</option>
+        <option value="KPIs.txt">KPIs.txt</option>
       </select>
       <button>Help</button>
       <button>About</button>
@@ -62,22 +66,6 @@
     const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
     const nextButton = document.querySelector('.card-buttons button:last-child');
     const selectDeckMessage = document.getElementById('selectDeckMessage');
-
-    // Lista de archivos .txt (puedes agregar o quitar archivos aquí)
-    const txtFiles = [
-      'cards01.txt',
-      'cards02.txt',
-      'cards03.txt',
-      'KPIs.txt'
-    ];
-
-    // Agregar las opciones al dropdown
-    txtFiles.forEach(file => {
-      const option = document.createElement('option');
-      option.value = file;
-      option.textContent = file;
-      decksDropdown.appendChild(option);
-    });
 
     // Función para cargar un deck desde un archivo .txt
     function loadDeck(filename) {
@@ -232,4 +220,3 @@
   </script>
 </body>
 </html>
-Use code with 
