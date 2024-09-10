@@ -67,12 +67,25 @@
     const nextButton = document.querySelector('.card-buttons button:last-child');
     const selectDeckMessage = document.getElementById('selectDeckMessage');
 
+    // Listener para el cambio de selección en el dropdown
+    decksDropdown.addEventListener('change', (event) => {
+      const selectedDeckFilename = event.target.value;
+      if (selectedDeckFilename) {
+        loadDeck(selectedDeckFilename);
+      }
+    });
+
     // Función para cargar un deck desde un archivo .txt
     function loadDeck(filename) {
       fetch(filename)
         .then(response => response.text())
         .then(text => {
+          // Reiniciar variables al cargar un nuevo mazo
           cards = [];
+          shuffledCards = [];
+          cardsSeen = 1;
+          currentCard = 0;
+
           const lines = text.split('\n');
           lines.forEach(line => {
             const [front, back] = line.split('|');
@@ -82,28 +95,16 @@
           });
 
           shuffledCards = shuffle(cards);
-          cardsSeen = 1;
-          currentCard = 0; // Reiniciar currentCard al cargar un nuevo mazo
+          showCard();
           updateCardCount();
           selectDeckMessage.style.display = 'none';
-
-          // Mostrar la primera tarjeta del nuevo mazo
-          showCard(); 
         })
         .catch(error => console.error('Error loading deck:', error));
     }
 
-    // Listener para el cambio de selección en el dropdown
-    decksDropdown.addEventListener('change', (event) => {
-      const selectedDeckFilename = event.target.value;
-      if (selectedDeckFilename) {
-        loadDeck(selectedDeckFilename); 
-      }
-    });
-
     // Simplificando el manejo del botón "Memorize"
     memorizeButton.addEventListener('click', () => {
-      studyMode = !studyMode;
+      studyMode = !studyMode; 
 
       // Actualiza el texto y el color del botón
       memorizeButton.textContent = studyMode ? 'Both Sides' : 'Both Sides';
@@ -139,18 +140,15 @@
       }
     });
 
-    // Función corregida para mostrar la tarjeta
     function showCard() {
       if (studyMode) {
-        // Modo "Both Sides"
-        if (shuffledCards.length > 0 && currentCard < shuffledCards.length) { 
+        if (shuffledCards.length > 0 && currentCard < shuffledCards.length) {
           const card = shuffledCards[currentCard];
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         } else {
           cardText.textContent = " ";
         }
       } else {
-        // Modo normal
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
           cardText.textContent = showingFront ? card.front : card.back;
@@ -171,7 +169,7 @@
 
     function nextCard() {
       if (studyMode) {
-        currentCard = Math.min(currentCard + 1, shuffledCards.length - 1); // Actualizar currentCard
+        currentCard = Math.min(currentCard + 1, shuffledCards.length - 1);
         showCard();
         updateCardCount();
         nextButton.disabled = currentCard === shuffledCards.length - 1;
@@ -187,7 +185,7 @@
 
     function previousCard() {
       if (studyMode) {
-        currentCard = Math.max(currentCard - 1, 0); // Actualizar currentCard
+        currentCard = Math.max(currentCard - 1, 0);
         showCard();
         updateCardCount();
         backButton.disabled = currentCard === 0;
@@ -202,7 +200,7 @@
     }
 
     function shuffle(array) {
-      let currentIndex = array.length, randomIndex;
+      let currentIndex = array.length,  randomIndex;
       while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
