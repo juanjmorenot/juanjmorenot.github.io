@@ -83,6 +83,7 @@
 
           shuffledCards = shuffle(cards);
           cardsSeen = 1;
+          currentCard = 0; // Reiniciar currentCard al cargar un nuevo mazo
           updateCardCount();
           selectDeckMessage.style.display = 'none';
 
@@ -138,15 +139,18 @@
       }
     });
 
+    // Función corregida para mostrar la tarjeta
     function showCard() {
       if (studyMode) {
-        if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-          const card = shuffledCards[cardsSeen - 1];
+        // Modo "Both Sides"
+        if (shuffledCards.length > 0 && currentCard < shuffledCards.length) { 
+          const card = shuffledCards[currentCard];
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         } else {
           cardText.textContent = " ";
         }
       } else {
+        // Modo normal
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
           cardText.textContent = showingFront ? card.front : card.back;
@@ -167,10 +171,10 @@
 
     function nextCard() {
       if (studyMode) {
-        cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
+        currentCard = Math.min(currentCard + 1, shuffledCards.length - 1); // Actualizar currentCard
         showCard();
         updateCardCount();
-        nextButton.disabled = cardsSeen === shuffledCards.length;
+        nextButton.disabled = currentCard === shuffledCards.length - 1;
       } else {
         cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
         showingFront = true;
@@ -183,10 +187,10 @@
 
     function previousCard() {
       if (studyMode) {
-        cardsSeen = Math.max(cardsSeen - 1, 1);
+        currentCard = Math.max(currentCard - 1, 0); // Actualizar currentCard
         showCard();
         updateCardCount();
-        backButton.disabled = cardsSeen === 1;
+        backButton.disabled = currentCard === 0;
       } else {
         cardsSeen = Math.max(cardsSeen - 1, 1);
         showingFront = true;
