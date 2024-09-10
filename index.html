@@ -207,8 +207,9 @@
       return array;
     }
 
+    // Función corregida para actualizar el contador de tarjetas
     function updateCardCount() {
-      cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
+      cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + cards.length;
     }
 
     function playSound() {
