@@ -1,52 +1,26 @@
-Margen Bruto|(Ingresos - Costo de los Bienes Vendidos) / Ingresossss
-Margen Operativo|(Ingresos - Costo de los Bienes Vendidos - Gastos Operativos) / Ingresos
-Margen Neto|Utilidad Neta / Ingresos
-Retorno sobre Activos (ROA)|Utilidad Neta / Activos Totales
-Retorno sobre el Patrimonio (ROE)|Utilidad Neta / Patrimonio Neto
-Ratio de Endeudamiento|Pasivo Total / Activo Total
-Ratio de Cobertura de Intereses|EBIT / Gastos por Intereses
-Ratio de Liquidez Corriente|Activo Corriente / Pasivo Corriente
-Ratio de Prueba Ácida|(Activo Corriente - Inventario) / Pasivo Corriente
-Rotación de Inventario|Costo de los Bienes Vendidos / Inventario Promedio
-Periodo Promedio de Cobro|Cuentas por Cobrar Promedio / (Ventas a Crédito Anuales / 365)
-Periodo Promedio de Pago|Cuentas por Pagar Promedio / (Compras a Crédito Anuales / 365)
-Rotación de Activos Totales|Ventas Netas / Activos Totales Promedio
-Flujo de Caja Libre|Flujo de Caja Operativo - Gastos de Capital
-Flujo de Caja Operativo|Utilidad Neta + Depreciación y Amortización - Cambios en el Capital de Trabajo
-Ratio Precio-Beneficio (P/E)|Precio por Acción / Utilidad por Acción
-Valor Contable por Acción|Patrimonio Neto / Número de Acciones en Circulación
-Dividendos por Acción|Dividendos Pagados / Número de Acciones en Circulación
-Ratio de Pago de Dividendos|Dividendos por Acción / Utilidad por Acción
-Rentabilidad por Dividendo|Dividendo Anual por Acción / Precio por Acción
-Crecimiento de Ingresos|(Ingresos del Año Actual - Ingresos del Año Anterior) / Ingresos del Año Anterior
-Crecimiento de Ganancias|(Utilidad Neta del Año Actual - Utilidad Neta del Año Anterior) / Utilidad Neta del Año Anterior
-Margen de Contribución|(Ingresos - Costos Variables) / Ingresos
-Punto de Equilibrio|(Costos Fijos) / (Precio de Venta por Unidad - Costo Variable por Unidad)
-Apalancamiento Operativo|Costos Fijos / Costos Totales
-Apalancamiento Financiero|Activo Total / Patrimonio Neto
-Valor Presente Neto (VPN)|Suma de los Flujos de Caja Descontados - Inversión Inicial
-Tasa Interna de Retorno (TIR)|Tasa de Descuento que hace que el VPN sea igual a Cero
-Periodo de Recuperación|Tiempo Necesario para Recuperar la Inversión Inicial
-Índice de Rentabilidad|Valor Presente de los Flujos de Caja Futuros / Inversión Inicial
-Costo de Capital Promedio Ponderado (WACC)|[(Costo de la Deuda * (1 - Tasa Impositiva) * (Deuda / (Deuda + Patrimonio))) + (Costo del Patrimonio * (Patrimonio / (Deuda + Patrimonio)))]
-Crecimiento de Dividendos|(Dividendo del Año Actual - Dividendo del Año Anterior) / Dividendo del Año Anterior
-Ratio de Endeudamiento a Largo Plazo|Deuda a Largo Plazo / Activo Total
-Ratio de Cobertura de Gastos de Intereses|EBIT / Gastos por Intereses
-Capital de Trabajo|Activo Corriente - Pasivo Corriente
-Eficiencia del Capital de Trabajo|Ventas / Capital de Trabajo
-Ratio de Endeudamiento de Capitalización de Mercado|Deuda Total / (Deuda Total + Valor de Mercado del Patrimonio)
-Ratio de Cobertura de Flujo de Caja|Flujo de Caja Operativo / Gastos por Intereses
-Ratio de Flujo de Caja Libre a Ingresos|Flujo de Caja Libre / Ingresos
-Ratio de Flujo de Caja Libre a Patrimonio|Flujo de Caja Libre / Patrimonio Neto
-Rendimiento de las Inversiones (ROI)|Ganancia de la Inversión / Costo de la Inversión
-Valor Económico Agregado (EVA)|NOPAT - (Capital Empleado * WACC)
-Retorno sobre el Capital Invertido (ROIC)|EBIT(1-Tasa Impositiva) / Capital Invertido
-Crecimiento Orgánico|(Ingresos del Año Actual - Ingresos del Año Anterior) / Ingresos del Año Anterior (Excluyendo Adquisiciones)
-Margen EBITDA|EBITDA / Ingresos
-Rotación de Activos Fijos|Ventas Netas / Activos Fijos Netos Promedio
-Ratio de Liquidez Rápida|(Efectivo + Equivalentes de Efectivo + Valores Negociables) / Pasivo Corriente
-Ratio de Cobertura de Dividendos|Utilidad Neta / Dividendos Pagados
-Ratio de Deuda a EBITDA|Deuda Total / EBITDA
-Ratio de Apalancamiento Deuda-Patrimonio|Deuda Total / Patrimonio Neto
-Ratio de Gastos Operativos a Ingresos|Gastos Operativos / Ingresos
-Ratio de Gastos Administrativos y de Marketing a Ingresos|(Gastos Administrativos + Gastos de Marketing) / Ingresos
+Margen Bruto|(Ingresos Totales - Costo de Ventas) / Ingresos Totales
+Margen Operativo|(Beneficio Operativo) / Ingresos Totales
+Margen Neto|(Beneficio Neto) / Ingresos Totales
+Retorno sobre Activos (ROA)|(Beneficio Neto) / Activos Totales
+Retorno sobre Capital (ROE)|(Beneficio Neto) / Capital Propio
+Retorno sobre Patrimonio (ROP)|(Beneficio Neto) / Patrimonio Neto
+Liquidez Corriente|Activos Corrientes / Pasivos Corrientes
+Prueba Ácida|(Activos Corrientes - Inventario) / Pasivos Corrientes
+Liquidez Rápida|(Activos Corrientes - Inventario - Gastos Prepagados) / Pasivos Corrientes
+Razón de Efectivo|Efectivo y Equivalentes de Efectivo / Pasivos Corrientes
+Razón de Endeudamiento|Deuda Total / Activos Totales
+Razón de Endeudamiento Patrimonial|Deuda Total / Patrimonio Neto
+Tasa de Cobertura de Intereses|Beneficio Antes de Intereses e Impuestos (BAII) / Gastos por Intereses
+Rotación de Inventario|Costo de Ventas / Inventario Promedio
+Periodo de Inventario|(Inventario Promedio / Costo de Ventas) * 365 días
+Rotación de Cuentas por Cobrar|Ventas a Crédito / Cuentas por Cobrar Promedio
+Periodo de Cobranza|(Cuentas por Cobrar Promedio / Ventas a Crédito) * 365 días
+Rotación de Activos Fijos|Ventas / Activos Fijos Totales
+Costo de Adquisición de Clientes (CAC)|Gastos Totales de Marketing / Número de Nuevos Clientes
+Valor de Vida Útil del Cliente (CLTV)|Valor Promedio de Compra del Cliente * Número Promedio de Compras del Cliente
+Tasa de Retención de Clientes|(Número de Clientes Reincidentes / Número de Clientes Totales) * 100
+Valor de Mercado|Precio de la Accion * Número de Acciones en Circulacion
+Valor Contable| Activos Totales - Pasivos Totales
+Valor Intrinseco |Valor Presente de los Flujos de Caja Futuros
+Rentabilidad del Capital de Trabajo|(Beneficio Neto) / Capital de Trabajo
+Capital de Trabajo| Activos Corrientes - Pasivos Corrientes
