@@ -4,19 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SharpenUp</title>
-  <style>
-    body {
-      background-color: #34b59e;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    /* ... [Resto de los estilos CSS - idénticos a los anteriores] ... */
-  </style>
+  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
@@ -75,7 +63,7 @@
     const nextButton = document.querySelector('.card-buttons button:last-child');
     const selectDeckMessage = document.getElementById('selectDeckMessage');
 
-    // Lista de nombres de archivos .txt
+    // Lista de archivos .txt (puedes agregar o quitar archivos aquí)
     const txtFiles = [
       'cards01.txt',
       'cards02.txt',
@@ -91,91 +79,77 @@
       decksDropdown.appendChild(option);
     });
 
-    // Listener para el cambio de deck
+    // Función para cargar un deck desde un archivo .txt
+    function loadDeck(filename) {
+      fetch(filename)
+        .then(response => response.text())
+        .then(text => {
+          cards = [];
+          const lines = text.split('\n');
+          lines.forEach(line => {
+            const [front, back] = line.split('|');
+            if (front && back) {
+              cards.push({ front: front.trim(), back: back.trim() });
+            }
+          });
+
+          shuffledCards = shuffle(cards);
+          cardsSeen = 1;
+          showCard();
+          updateCardCount();
+          selectDeckMessage.style.display = 'none';
+        })
+        .catch(error => console.error('Error loading deck:', error));
+    }
+
+    // Listener para el cambio de selección en el dropdown
     decksDropdown.addEventListener('change', (event) => {
       const selectedDeckFilename = event.target.value;
       if (selectedDeckFilename) {
-        const selectedDeckUrl = `${selectedDeckFilename}`;
-        fetch(selectedDeckUrl)
-          .then(response => response.text())
-          .then(text => {
-            // Limpiar las tarjetas existentes
-            cards = [];
-            // Procesar el texto del archivo .txt
-            const lines = text.split('\n');
-            lines.forEach(line => {
-              const [front, back] = line.split('|');
-              if (front && back) {
-                cards.push({ front: front.trim(), back: back.trim() });
-              }
-            });
-
-            // Mezclar las tarjetas
-            shuffledCards = shuffle(cards);
-            // Reiniciar el contador de tarjetas
-            cardsSeen = 1;
-            // Mostrar la primera tarjeta
-            showCard();
-            // Actualizar el contador de tarjetas en la interfaz
-            updateCardCount();
-            // Ocultar el mensaje de selección de deck
-            selectDeckMessage.style.display = 'none';
-          })
-          .catch(error => console.error('Error loading deck:', error));
+        loadDeck(selectedDeckFilename); 
       }
     });
 
-    // Listener para el botón "Memorize"
+    // Simplificando el manejo del botón "Memorize"
     memorizeButton.addEventListener('click', () => {
-      // Cambiar el modo de estudio
       studyMode = !studyMode;
 
-      // Actualizar el texto y estilo del botón
+      // Actualiza el texto y el color del botón
       memorizeButton.textContent = studyMode ? 'Both Sides' : 'Both Sides';
       memorizeButton.style.color = studyMode ? '#ff9e00' : '#212121';
 
       if (studyMode) {
-        // Modo "Both Sides"
         currentCard = 0;
         showCard();
         updateCardCount();
 
-        // Deshabilitar botones innecesarios
         backButton.disabled = false;
         nextButton.disabled = false;
         flipButton.disabled = true;
 
-        // Ocultar etiqueta de pregunta/respuesta
         cardLabel.style.display = 'none';
-        // Ajustar el margen del contador de tarjetas
         cardCountDisplay.style.marginLeft = 'auto';
       } else {
-        // Modo normal
         cardsSeen = 1;
         showingFront = true;
         showCard();
         updateCardCount();
 
-        // Habilitar/deshabilitar botones según corresponda
         backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
         nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
         flipButton.disabled = false;
 
-        // Restaurar estilo del botón "Memorize"
+        // Restaurar el color de fondo al gris original
         memorizeButton.style.backgroundColor = '#ececec';
         memorizeButton.style.color = '#cdcdcd';
 
-        // Mostrar etiqueta de pregunta/respuesta
         cardLabel.style.display = 'block';
-        // Restaurar margen del contador de tarjetas
         cardCountDisplay.style.marginLeft = '0';
       }
     });
 
-    // Función para mostrar la tarjeta actual
     function showCard() {
       if (studyMode) {
-        // Modo "Both Sides"
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
@@ -183,10 +157,8 @@
           cardText.textContent = " ";
         }
       } else {
-        // Modo normal
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
-          // Mostrar la pregunta o la respuesta según corresponda
           cardText.textContent = showingFront ? card.front : card.back;
           cardLabel.textContent = showingFront ? "Question" : "Answer";
         } else {
@@ -196,7 +168,6 @@
       }
     }
 
-    // Función para voltear la tarjeta
     function flipCard() {
       if (!studyMode) {
         showingFront = !showingFront;
@@ -204,7 +175,6 @@
       }
     }
 
-    // Función para ir a la siguiente tarjeta
     function nextCard() {
       if (studyMode) {
         cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
@@ -221,7 +191,6 @@
       }
     }
 
-    // Función para ir a la tarjeta anterior
     function previousCard() {
       if (studyMode) {
         cardsSeen = Math.max(cardsSeen - 1, 1);
@@ -238,7 +207,6 @@
       }
     }
 
-    // Función para mezclar las tarjetas (algoritmo Fisher-Yates)
     function shuffle(array) {
       let currentIndex = array.length, randomIndex;
       while (currentIndex != 0) {
@@ -251,12 +219,10 @@
       return array;
     }
 
-    // Función para actualizar el contador de tarjetas en la interfaz
     function updateCardCount() {
       cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
     }
 
-    // Función para reproducir el sonido del botón
     function playSound() {
       const buttonSound = document.getElementById('buttonSound');
       buttonSound.currentTime = 0;
@@ -266,3 +232,4 @@
   </script>
 </body>
 </html>
+Use code with 
