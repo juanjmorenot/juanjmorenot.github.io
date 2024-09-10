@@ -35,6 +35,8 @@ body {
   display: flex;
 }
 
+/* Estilo para los botones del top bar (incluyendo el select) */
+.top-bar .top-buttons select,
 .top-bar .top-buttons button {
   background-color: transparent;
   color: #828282;
@@ -48,6 +50,7 @@ body {
   font-family: 'Cabin', sans-serif;
 }
 
+.top-bar .top-buttons select:hover,
 .top-bar .top-buttons button:hover {
   background-color: #f0f0f0;
 }
@@ -98,7 +101,8 @@ body {
 /* Estilos para el encabezado de la tarjeta */
 .card-header {
   display: flex;
-  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  justify-content: space-between;
+  /* Distribuye el espacio entre los elementos */
   align-items: center;
   width: 100%;
   margin-bottom: 10px;
@@ -120,25 +124,25 @@ body {
 
 .card-text .question {
   background-color: #f9f9f9;
-  border: 2px solid #bcbcbc; 
+  border: 2px solid #bcbcbc;
   border-radius: 16px;
-  padding: 20px; 
-  width: 90%; 
-  box-sizing: border-box; 
-  margin-bottom: 5px; 
+  padding: 20px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
 .card-text .answer {
-  background-color: #fffcd4; 
-  border: 2px solid #ffde00; 
-  border-radius: 16px; 
-  padding: 20px; 
-  width: 90%; 
+  background-color: #fffcd4;
+  border: 2px solid #ffde00;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
   box-sizing: border-box;
   margin-top: 5px;
 }
 
-.card-buttons { 
+.card-buttons {
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -167,11 +171,10 @@ button:hover {
 #cardCount {
   font-size: 1rem;
   font-weight: 700;
-
 }
 
 #cardLabel {
-  font-size: 1rem; 
+  font-size: 1rem;
   font-weight: 700;
 }
 
@@ -193,22 +196,11 @@ button:hover {
   background-color: #c4c4c4; /* Gris más oscuro al pasar el ratón */
 }
 
-/* No se necesita la clase 'active' en el CSS */
-
-#fileInput {
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
 .memorize-button-container {
   width: 340px;
   display: flex;
   justify-content: center;
-  margin-bottom: 4px; 
-}
-
-.file-button-container {
-  display: none;
+  margin-bottom: 4px;
 }
 
 #selectDeckMessage {
