@@ -77,7 +77,10 @@
 
     // Función para cargar un deck desde un archivo .txt
     function loadDeck(filename) {
-      fetch(filename)
+      // Construir la ruta relativa correcta
+      const filePath = filename; 
+
+      fetch(filePath)
         .then(response => response.text())
         .then(text => {
           // Reiniciar variables al cargar un nuevo mazo
