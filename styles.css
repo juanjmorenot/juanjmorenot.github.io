@@ -1,16 +1,17 @@
 body {
-  background-color: #34b59e;
+  background-color: #c4b5fd;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Centra verticalmente el contenido */
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
+  
 }
 
 /* Estilos para el top bar */
 .top-bar {
-  background-color: #fefefe;
+  background-color: #fff;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -20,26 +21,22 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Asegura que la barra esté por encima del contenido */
 }
 
 .top-bar .title {
-  font-size: 2rem;
-  font-weight: bolder;
+  font-size: 1.8rem;
+  font-weight: bold;
   font-family: 'Cabin', sans-serif;
-  color: #ffce00;
 }
 
-.top-bar .top-buttons {
+.top-bar .top-buttons { /* Clase más específica */
   display: flex;
 }
 
-/* Estilo para los botones del top bar (incluyendo el select) */
-.top-bar .top-buttons select,
 .top-bar .top-buttons button {
   background-color: transparent;
-  color: #828282;
+  color: #3a3a3a;
   border: none;
   padding: 8px 16px;
   border-radius: 10px;
@@ -50,7 +47,6 @@ body {
   font-family: 'Cabin', sans-serif;
 }
 
-.top-bar .top-buttons select:hover,
 .top-bar .top-buttons button:hover {
   background-color: #f0f0f0;
 }
@@ -59,23 +55,24 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 120px;
+  padding-top: 140px; /* Espacio para la barra superior */
   width: 100%;
   box-sizing: border-box;
-  height: 100vh;
+  height: 100vh; /* Asegura que el contenedor ocupe toda la altura */
 }
 
 .card {
   background-color: white;
   border-radius: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
   position: relative;
+  /* Agregado para posicionar el contador */
   width: 300px;
   margin-top: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  display: flex; /* Habilita flexbox en la tarjeta */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
 }
 
 .card::before {
@@ -98,51 +95,42 @@ body {
   box-sizing: border-box;
 }
 
-/* Estilos para el encabezado de la tarjeta */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  /* Distribuye el espacio entre los elementos */
-  align-items: center;
-  width: 100%;
-  margin-bottom: 10px;
-  color: #1f7a6a;
-}
-
 .card-text {
   font-size: 1rem;
   text-align: center;
   font-weight: 100;
   padding: 0 10px;
+  /* Alinear al centro del contenedor */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  color: #3a3a3a;
+  height: 100%; /* Ajustar altura */
 }
 
 .card-text .question {
-  background-color: #f9f9f9;
-  border: 2px solid #bcbcbc;
-  border-radius: 16px;
-  padding: 20px;
-  width: 90%;
-  box-sizing: border-box;
-  margin-bottom: 5px;
+  /* Estilo para la pregunta */
+  background-color: #f9f9f9; /* Fondo gris claro */
+  border: 2px solid #bcbcbc; /* Borde gris */
+  border-radius: 16px; /* Bordes redondeados */
+  padding: 20px; /* Espacio interno */
+  width: 90%; /* Ancho del contenedor */
+  box-sizing: border-box; /* Incluimos el padding en el ancho */
+  margin-bottom: 5px; /* Espacio abajo de la pregunta */
 }
 
 .card-text .answer {
-  background-color: #fffcd4;
-  border: 2px solid #ffde00;
-  border-radius: 16px;
-  padding: 20px;
-  width: 90%;
-  box-sizing: border-box;
-  margin-top: 5px;
+  /* Estilo para la respuesta */
+  background-color: #fffcd4; /* Fondo color especificado */
+  border: 2px solid #ffde00; /* Borde gris */
+  border-radius: 16px; /* Bordes redondeados */
+  padding: 20px; /* Espacio interno */
+  width: 90%; /* Ancho del contenedor */
+  box-sizing: border-box; /* Incluimos el padding en el ancho */
+  margin-top: 5px; /* Espacio arriba de la respuesta */
 }
 
-.card-buttons {
+.card-buttons { /* Clase más específica */
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -151,37 +139,39 @@ body {
 }
 
 .card-buttons button {
-  background-color: #34b59e69;
-  color: #1f7a6a;
+  /* ... (Estilos para los botones de la tarjeta) ... */
+  background-color: #e0d9ff;
+  color: #3a3a3a;
   border: none;
   padding: 16px 20px;
   border-radius: 16px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease;
   font-family: 'Cabin', sans-serif;
-  font-weight: bolder;
 }
 
 button:hover {
-  background-color: #fcd22154;
-  color:#f0c200
+  background-color: #d6d1ff;
 }
 
 #cardCount {
   font-size: 1rem;
   font-weight: 700;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 #cardLabel {
-  font-size: 1rem;
-  font-weight: 700;
+  /* Se elimina este elemento, ya que no se necesita */
+  display: none;
 }
 
-/* Estilos para el botón Memorize */
 #memorizeButton {
-  background-color: #ececec; /* Gris para el relleno */
-  color: #cdcdcd; /* Gris oscuro para el texto */
+  background-color: #d9d9d9;
+  color: #4a4a4a;
   border: none;
   padding: 8px 20px;
   border-radius: 10px;
@@ -189,18 +179,29 @@ button:hover {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 0px;
-  font-family: 'Cabin', sans-serif;
+    font-family: 'Cabin', sans-serif;
 }
 
 #memorizeButton:hover {
-  background-color: #c4c4c4; /* Gris más oscuro al pasar el ratón */
+  background-color: #c4c4c4;
+}
+
+/* No se necesita la clase 'active' en el CSS */
+
+#fileInput {
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .memorize-button-container {
-  width: 340px;
+  width: 340px; /* Ancho del box */
   display: flex;
-  justify-content: center;
-  margin-bottom: 4px;
+  justify-content: center; /* Centra el botón horizontalmente */
+  margin-bottom: 4px; /* Espacio entre el botón Memorize y la tarjeta */
+}
+
+.file-button-container {
+  display: none;
 }
 
 #selectDeckMessage {
