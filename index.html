@@ -1,21 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flashcards</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #c4b5fd;
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Cabin', sans-serif;
+    }
+
+    .top-bar {
+      background-color: #fff;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10; 
+    }
+
+    .top-bar .title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      font-family: 'Cabin', sans-serif;
+    }
+
+    .top-bar .top-buttons { 
+      display: flex;
+      align-items: center; 
+    }
+
+    .top-bar .top-buttons #deckSelect {
+      background-color: transparent;
+      color: #3a3a3a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+      font-family: 'Cabin', sans-serif;
+      -webkit-appearance: none; 
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 24 24' width='24px' height='24px'><path d='M7 10l5 5 5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right .7em center;
+      background-size: .65em auto, 100%; 
+    }
+
+    .top-bar .top-buttons #deckSelect:hover {
+      background-color: #f0f0f0;
+    }
+
+    .top-bar .top-buttons button {
+      background-color: transparent;
+      color: #3a3a3a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+      font-family: 'Cabin', sans-serif;
+    }
+
+    .top-bar .top-buttons button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 140px; 
+      width: 100%;
+      box-sizing: border-box;
+      height: 100vh; 
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 24px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      position: relative;
+      width: 300px;
+      margin-top: 0px;
+      display: flex; 
+      justify-content: center;
+      align-items: center; 
+    }
+
+    .card::before {
+      content: "";
+      display: block;
+      padding-top: 133.33%;
+    }
+
+    .card-content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 100;
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%; 
+    }
+
+    .card-text .question {
+      background-color: #f9f9f9; 
+      border: 2px solid #bcbcbc;
+      border-radius: 16px; 
+      padding: 20px; 
+      width: 90%; 
+      box-sizing: border-box; 
+      margin-bottom: 5px; 
+    }
+
+    .card-text .answer {
+      background-color: #fffcd4;
+      border: 2px solid #ffde00;
+      border-radius: 16px; 
+      padding: 20px;
+      width: 90%; 
+      box-sizing: border-box; 
+      margin-top: 5px;
+    }
+
+    .card-buttons { 
+      display: flex;
+      justify-content: space-between;
+      width: 85%;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .card-buttons button {
+      background-color: #e0d9ff;
+      color: #3a3a3a;
+      border: none;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Cabin', sans-serif;
+    }
+
+    button:hover {
+      background-color: #d6d1ff;
+    }
+
+    #cardCount {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #memorizeButton {
+      background-color: #d9d9d9;
+      color: #4a4a4a;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 0px;
+        font-family: 'Cabin', sans-serif;
+    }
+
+    #memorizeButton:hover {
+      background-color: #c4c4c4;
+    }
+
+    #selectDeckMessage {
+      font-family: 'Cabin', sans-serif;
+      color: #ccc; 
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <div class="top-bar">
     <div class="title">Flashcards</div>
     <div class="top-buttons">
-      <button id="decksButton">Decks</button>
+      <select id="deckSelect">
+        <option value="">Select Deck</option>
+      </select>
       <button>Boton 2</button>
       <button>Boton 3</button>
     </div>
@@ -40,9 +246,7 @@
     </div>
   </div>
 
-  <input type="file" id="fileInput" accept=".txt" style="display: none;">
-
-  <audio id="buttonSound" src="C:\Users\User\Documents\Juan Jose\Flashcards\Flashcards\analog-appliance-button.mp3"></audio>
+  <audio id="buttonSound" src="analog-appliance-button.mp3"></audio>
 
   <script>
     let cards = [];
@@ -52,109 +256,106 @@
     let cardsSeen = 0;
     let studyMode = false;
 
-    const fileInput = document.getElementById('fileInput');
-    const decksButton = document.getElementById('decksButton');
+    const deckSelect = document.getElementById('deckSelect');
     const cardCountDisplay = document.getElementById('cardCount');
     const memorizeButton = document.getElementById('memorizeButton');
     const cardText = document.getElementById('cardText');
-    const cardLabel = document.getElementById('cardLabel');
+    const selectDeckMessage = document.getElementById('selectDeckMessage');
     const backButton = document.querySelector('.card-buttons button:first-child');
     const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
     const nextButton = document.querySelector('.card-buttons button:last-child');
-    const selectDeckMessage = document.getElementById('selectDeckMessage');
 
-    decksButton.addEventListener('click', () => {
-      fileInput.click();
-    });
+    // Obtener la lista de archivos .txt de la carpeta "Decks" desde GitHub
+    fetch('https://api.github.com/repos/juanjmorenot/juanjmorenot.github.io/contents/Decks')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al obtener la lista de decks');
+        }
+        return response.json();
+      })
+      .then(files => {
+        const txtFiles = files.filter(file => file.name.endsWith('.txt'));
 
-    fileInput.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        const text = e.target.result;
-        const lines = text.split('\n');
-        lines.forEach(line => {
-          const [front, back] = line.split('|');
-          if (front && back) {
-            cards.push({ front: front.trim(), back: back.trim() });
-          }
+        txtFiles.forEach(file => {
+          const option = document.createElement('option');
+          option.value = file.download_url;
+          option.textContent = file.name;
+          deckSelect.appendChild(option);
         });
+      })
+      .catch(error => {
+        console.error(error);
+        selectDeckMessage.textContent = 'Error al cargar los decks';
+      });
 
-        shuffledCards = shuffle(cards);
-        cardsSeen = 1;
+    deckSelect.addEventListener('change', () => {
+      const selectedDeck = deckSelect.value;
+
+      if (selectedDeck) {
+        fetch(selectedDeck)
+          .then(response => response.text())
+          .then(text => {
+            cards = parseDeck(text);
+            shuffledCards = shuffle(cards);
+            cardsSeen = 1;
+            showCard();
+            updateCardCount();
+            selectDeckMessage.style.display = 'none';
+          });
+      } else {
+        cards = [];
+        shuffledCards = [];
+        cardsSeen = 0;
         showCard();
         updateCardCount();
-
-        // Ocultar el mensaje después de cargar un deck
-        selectDeckMessage.style.display = 'none';
+        selectDeckMessage.style.display = 'block';
       }
-
-      reader.readAsText(file);
     });
 
     memorizeButton.addEventListener('click', () => {
       studyMode = !studyMode;
       if (studyMode) {
-        // Mostrar una tarjeta en modo "Memorize"
         currentCard = 0;
-        // No reiniciar cardsSeen en modo "Study"
         showCard();
         updateCardCount();
-
-        // Habilitar "Back" y "Next", deshabilitar "Flip"
         backButton.disabled = false;
         nextButton.disabled = false;
         flipButton.disabled = true;
-
-        // Cambiar el estilo del botón "Memorize"
         memorizeButton.style.backgroundColor = '#e3fbb4';
         memorizeButton.style.color = '#b8ff2b';
       } else {
-        // Volver al modo individual
         cardsSeen = 1;
         showingFront = true;
         showCard();
         updateCardCount();
-
-        // Deshabilitar "Back" y "Next" si no hay tarjetas
         backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
         nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
-        flipButton.disabled = false; // Habilitar "Flip"
-
-        // Restaurar el estilo del botón "Memorize"
-        memorizeButton.style.backgroundColor = 'initial'; // Restaura al color por defecto
-        memorizeButton.style.color = 'initial'; // Restaura al color por defecto
+        flipButton.disabled = false; 
+        memorizeButton.style.backgroundColor = 'initial'; 
+        memorizeButton.style.color = 'initial'; 
       }
     });
 
     function showCard() {
       if (studyMode) {
-        // Mostrar una tarjeta en modo "Memorize"
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
-          cardLabel.textContent = "";
         } else {
           cardText.textContent = " ";
-          cardLabel.textContent = "";
         }
       } else {
-        // Mostrar la tarjeta individual
         if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
           const card = shuffledCards[cardsSeen - 1];
           cardText.textContent = showingFront ? card.front : card.back;
-          cardLabel.textContent = showingFront ? "Question" : "Answer";
         } else {
           cardText.textContent = " ";
-          cardLabel.textContent = "";
         }
       }
     }
 
     function flipCard() {
       if (!studyMode) {
-        // Voltear solo en modo individual
         showingFront = !showingFront;
         showCard();
       }
@@ -162,48 +363,32 @@
 
     function nextCard() {
       if (studyMode) {
-        // Avanzar a la siguiente tarjeta en modo "Memorize"
         cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
         showCard();
         updateCardCount();
-
-        // Deshabilitar "Next" si es la última tarjeta
         nextButton.disabled = cardsSeen === shuffledCards.length;
       } else {
-        // Avanzar a la siguiente tarjeta solo en modo individual
         cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
         showingFront = true;
         showCard();
         updateCardCount();
-
-        // Deshabilitar "Next" si es la última tarjeta
         nextButton.disabled = cardsSeen === shuffledCards.length;
-
-        // Habilitar "Back"
         backButton.disabled = false;
       }
     }
 
     function previousCard() {
       if (studyMode) {
-        // Volver a la tarjeta anterior en modo "Memorize"
         cardsSeen = Math.max(cardsSeen - 1, 1);
         showCard();
         updateCardCount();
-
-        // Deshabilitar "Back" si es la primera tarjeta
         backButton.disabled = cardsSeen === 1;
       } else {
-        // Volver a la tarjeta anterior solo en modo individual
         cardsSeen = Math.max(cardsSeen - 1, 1);
         showingFront = true;
         showCard();
         updateCardCount();
-
-        // Deshabilitar "Back" si es la primera tarjeta
         backButton.disabled = cardsSeen === 1;
-
-        // Habilitar "Next"
         nextButton.disabled = false;
       }
     }
@@ -230,7 +415,18 @@
       buttonSound.volume = 0.6;
       buttonSound.play();
     }
+
+    function parseDeck(text) {
+      const lines = text.split('\n');
+      const cards = [];
+      lines.forEach(line => {
+        const [front, back] = line.split('|');
+        if (front && back) {
+          cards.push({ front: front.trim(), back: back.trim() });
+        }
+      });
+      return cards;
+    }
   </script>
 </body>
-
 </html>
