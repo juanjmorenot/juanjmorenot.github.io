@@ -288,6 +288,7 @@
         selectDeckMessage.textContent = 'Error al cargar los decks';
       });
 
+    // Manejar el cambio de selección en el elemento "select"
     deckSelect.addEventListener('change', () => {
       const selectedDeck = deckSelect.value;
 
@@ -330,9 +331,9 @@
         updateCardCount();
         backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
         nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
-        flipButton.disabled = false; 
-        memorizeButton.style.backgroundColor = 'initial'; 
-        memorizeButton.style.color = 'initial'; 
+        flipButton.disabled = false;
+        memorizeButton.style.backgroundColor = 'initial';
+        memorizeButton.style.color = 'initial';
       }
     });
 
