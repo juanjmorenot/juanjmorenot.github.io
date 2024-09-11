@@ -182,22 +182,21 @@ button:hover {
   right: 10px;
 }
 
+/* Estilo único para el botón Memorize */
 #memorizeButton {
-  background-color: #d9d9d9; 
-  color: black; 
+  background-color: #d9d9d9;
+  color: black;
   border: none;
   padding: 8px 20px;
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-  transition: color 0.3s ease; 
-  margin-bottom: 0px;
   font-family: 'Cabin', sans-serif;
 }
 
-/* Estado activo (Modo Memorize) */
-#memorizeButton:hover { 
-  color: #b8ff2b; 
+/* Estilo para el modo Memorize activo */
+#memorizeButton.active {
+  background-color: lightgreen;
 }
 
 #selectDeckMessage {
