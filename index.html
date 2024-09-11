@@ -201,6 +201,11 @@
       font-family: 'Cabin', sans-serif;
     }
 
+    /* Estilo para el modo Memorize activo */
+    #memorizeButton.active {
+      background-color: lightgreen;
+    }
+
     #selectDeckMessage {
       font-family: 'Cabin', sans-serif;
       color: #ccc; 
@@ -310,16 +315,19 @@
 
     memorizeButton.addEventListener('click', () => {
       studyMode = !studyMode;
+
       if (studyMode) {
+        // Agregar la clase "active" para cambiar el estilo
+        memorizeButton.classList.add('active');
         currentCard = 0;
         showCard();
         updateCardCount();
         backButton.disabled = false;
         nextButton.disabled = false;
         flipButton.disabled = true;
-        //memorizeButton.style.backgroundColor = '#e3fbb4';
-        //memorizeButton.style.color = '#b8ff2b';
       } else {
+        // Quitar la clase "active" para volver al estilo normal
+        memorizeButton.classList.remove('active');
         cardsSeen = 1;
         showingFront = true;
         showCard();
@@ -327,8 +335,6 @@
         backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
         nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
         flipButton.disabled = false;
-        //memorizeButton.style.backgroundColor = 'initial';
-        //memorizeButton.style.color = 'initial';
       }
     });
 
