@@ -2,14 +2,12 @@ body {
   background-color: #c4b5fd;
   display: flex;
   justify-content: center;
-  align-items: center; /* Centra verticalmente el contenido */
+  align-items: center; 
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
-  
 }
 
-/* Estilos para el top bar */
 .top-bar {
   background-color: #fff;
   width: 100%;
@@ -21,7 +19,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10; /* Asegura que la barra esté por encima del contenido */
+  z-index: 10; 
 }
 
 .top-bar .title {
@@ -30,8 +28,33 @@ body {
   font-family: 'Cabin', sans-serif;
 }
 
-.top-bar .top-buttons { /* Clase más específica */
+.top-bar .top-buttons { 
   display: flex;
+  align-items: center; 
+}
+
+.top-bar .top-buttons #deckSelect {
+  background-color: transparent;
+  color: #3a3a3a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  font-family: 'Cabin', sans-serif;
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 24 24' width='24px' height='24px'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right .7em center;
+  background-size: .65em auto, 100%; 
+}
+
+.top-bar .top-buttons #deckSelect:hover {
+  background-color: #f0f0f0;
 }
 
 .top-bar .top-buttons button {
@@ -55,10 +78,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 140px; /* Espacio para la barra superior */
+  padding-top: 140px; 
   width: 100%;
   box-sizing: border-box;
-  height: 100vh; /* Asegura que el contenedor ocupe toda la altura */
+  height: 100vh; 
 }
 
 .card {
@@ -67,12 +90,11 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
   position: relative;
-  /* Agregado para posicionar el contador */
   width: 300px;
   margin-top: 0px;
-  display: flex; /* Habilita flexbox en la tarjeta */
-  justify-content: center; /* Centra horizontalmente el contenido */
-  align-items: center; /* Centra verticalmente el contenido */
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
 }
 
 .card::before {
@@ -100,37 +122,34 @@ body {
   text-align: center;
   font-weight: 100;
   padding: 0 10px;
-  /* Alinear al centro del contenedor */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; /* Ajustar altura */
+  height: 100%; 
 }
 
 .card-text .question {
-  /* Estilo para la pregunta */
-  background-color: #f9f9f9; /* Fondo gris claro */
-  border: 2px solid #bcbcbc; /* Borde gris */
-  border-radius: 16px; /* Bordes redondeados */
-  padding: 20px; /* Espacio interno */
-  width: 90%; /* Ancho del contenedor */
-  box-sizing: border-box; /* Incluimos el padding en el ancho */
-  margin-bottom: 5px; /* Espacio abajo de la pregunta */
+  background-color: #f9f9f9; 
+  border: 2px solid #bcbcbc;
+  border-radius: 16px; 
+  padding: 20px; 
+  width: 90%; 
+  box-sizing: border-box; 
+  margin-bottom: 5px; 
 }
 
 .card-text .answer {
-  /* Estilo para la respuesta */
-  background-color: #fffcd4; /* Fondo color especificado */
-  border: 2px solid #ffde00; /* Borde gris */
-  border-radius: 16px; /* Bordes redondeados */
-  padding: 20px; /* Espacio interno */
-  width: 90%; /* Ancho del contenedor */
-  box-sizing: border-box; /* Incluimos el padding en el ancho */
-  margin-top: 5px; /* Espacio arriba de la respuesta */
+  background-color: #fffcd4;
+  border: 2px solid #ffde00;
+  border-radius: 16px; 
+  padding: 20px;
+  width: 90%; 
+  box-sizing: border-box; 
+  margin-top: 5px;
 }
 
-.card-buttons { /* Clase más específica */
+.card-buttons { 
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -139,7 +158,6 @@ body {
 }
 
 .card-buttons button {
-  /* ... (Estilos para los botones de la tarjeta) ... */
   background-color: #e0d9ff;
   color: #3a3a3a;
   border: none;
@@ -164,47 +182,25 @@ button:hover {
   right: 10px;
 }
 
-#cardLabel {
-  /* Se elimina este elemento, ya que no se necesita */
-  display: none;
-}
-
 #memorizeButton {
-  background-color: #d9d9d9;
-  color: #4a4a4a;
+  background-color: #d9d9d9; 
+  color: black; 
   border: none;
   padding: 8px 20px;
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease; 
   margin-bottom: 0px;
-    font-family: 'Cabin', sans-serif;
+  font-family: 'Cabin', sans-serif;
 }
 
-#memorizeButton:hover {
-  background-color: #c4c4c4;
-}
-
-/* No se necesita la clase 'active' en el CSS */
-
-#fileInput {
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
-.memorize-button-container {
-  width: 340px; /* Ancho del box */
-  display: flex;
-  justify-content: center; /* Centra el botón horizontalmente */
-  margin-bottom: 4px; /* Espacio entre el botón Memorize y la tarjeta */
-}
-
-.file-button-container {
-  display: none;
+/* Estado activo (Modo Memorize) */
+#memorizeButton:hover { 
+  color: #b8ff2b; 
 }
 
 #selectDeckMessage {
   font-family: 'Cabin', sans-serif;
-  color: #ccc; /* Gris claro */
+  color: #ccc; 
 }
