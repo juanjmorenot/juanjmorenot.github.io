@@ -189,21 +189,16 @@
       right: 10px;
     }
 
+    /* Estilo único para el botón Memorize */
     #memorizeButton {
-      background-color: #d9d9d9; 
-      color: black; 
+      background-color: #d9d9d9;
+      color: black;
       border: none;
       padding: 8px 20px;
       border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
-      transition: color 0.3s ease; 
-      margin-bottom: 0px;
       font-family: 'Cabin', sans-serif;
-    }
-
-    #memorizeButton:hover { 
-      color: #b8ff2b; 
     }
 
     #selectDeckMessage {
@@ -322,8 +317,8 @@
         backButton.disabled = false;
         nextButton.disabled = false;
         flipButton.disabled = true;
-        memorizeButton.style.backgroundColor = '#e3fbb4';
-        memorizeButton.style.color = '#b8ff2b';
+        //memorizeButton.style.backgroundColor = '#e3fbb4';
+        //memorizeButton.style.color = '#b8ff2b';
       } else {
         cardsSeen = 1;
         showingFront = true;
@@ -332,8 +327,8 @@
         backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
         nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
         flipButton.disabled = false;
-        memorizeButton.style.backgroundColor = 'initial';
-        memorizeButton.style.color = 'initial';
+        //memorizeButton.style.backgroundColor = 'initial';
+        //memorizeButton.style.color = 'initial';
       }
     });
 
