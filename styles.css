@@ -84,6 +84,13 @@ body {
   height: 100vh; 
 }
 
+/* Estilos para los botones de modo */
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 .card {
   background-color: white;
   border-radius: 24px;
@@ -182,8 +189,9 @@ button:hover {
   right: 10px;
 }
 
-/* Estilo único para el botón Memorize */
-#memorizeButton {
+/* Estilo único para los botones Memorize y Reverse Quiz */
+#memorizeButton, 
+#reverseQuizButton {
   background-color: #d9d9d9;
   color: black;
   border: none;
@@ -194,8 +202,9 @@ button:hover {
   font-family: 'Cabin', sans-serif;
 }
 
-/* Estilo para el modo Memorize activo */
-#memorizeButton.active {
+/* Estilo para el modo activo (verde) */
+#memorizeButton.active,
+#reverseQuizButton.active {
   background-color: lightgreen;
 }
 
