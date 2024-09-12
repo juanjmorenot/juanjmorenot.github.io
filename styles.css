@@ -2,7 +2,7 @@ body {
   background-color: #c4b5fd;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
@@ -84,7 +84,6 @@ body {
   height: 100vh; 
 }
 
-/* Estilos para los botones de modo */
 .mode-buttons {
   display: flex;
   gap: 10px;
@@ -189,7 +188,8 @@ button:hover {
   right: 10px;
 }
 
-/* Estilo único para los botones Memorize y Reverse Quiz */
+/* Estilo único para los botones de modo */
+#standardQuizButton, 
 #memorizeButton, 
 #reverseQuizButton {
   background-color: #d9d9d9;
@@ -203,6 +203,7 @@ button:hover {
 }
 
 /* Estilo para el modo activo (verde) */
+#standardQuizButton.active,
 #memorizeButton.active,
 #reverseQuizButton.active {
   background-color: lightgreen;
