@@ -146,7 +146,7 @@
 
     function nextCard() {
       cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-      showingFront = !reverseQuizMode; // Ajustar para Reverse Quiz
+      showingFront = !reverseQuizMode; 
       showCard();
       updateCardCount();
       updateButtonStates(); 
@@ -154,7 +154,7 @@
 
     function previousCard() {
       cardsSeen = Math.max(cardsSeen - 1, 1);
-      showingFront = !reverseQuizMode; // Ajustar para Reverse Quiz
+      showingFront = !reverseQuizMode;
       showCard();
       updateCardCount();
       updateButtonStates();
@@ -199,7 +199,7 @@
       standardQuizButton.classList.toggle('active', standardQuizMode);
       memorizeButton.classList.toggle('active', memorizeMode);
       reverseQuizButton.classList.toggle('active', reverseQuizMode);
-      flipButton.disabled = memorizeMode;
+      flipButton.disabled = memorizeMode; 
     }
 
     function showCard() {
@@ -207,13 +207,11 @@
         const card = shuffledCards[cardsSeen - 1];
 
         if (standardQuizMode) {
-          cardText.innerHTML = showingFront
-            ? `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`
-            : `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`;
+          cardText.textContent = showingFront ? card.front : card.back; 
         } else if (memorizeMode) {
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         } else if (reverseQuizMode) {
-          cardText.innerHTML = showingFront
+          cardText.innerHTML = showingFront 
             ? `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`
             : `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         }
