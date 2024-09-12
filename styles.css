@@ -78,7 +78,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 140px;
+  padding-top: 100px;
   width: 100%;
   box-sizing: border-box;
   height: 100vh;
@@ -87,7 +87,7 @@ body {
 .mode-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px; /* Margen inferior reducido a la mitad */
+  margin-bottom: 20px; /* Margen inferior reducido a la mitad */
 }
 
 .card {
