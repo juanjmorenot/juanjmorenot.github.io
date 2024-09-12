@@ -65,10 +65,8 @@
     const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
     const nextButton = document.querySelector('.card-buttons button:last-child');
 
-    // Inicializar el modo "Standard Quiz" como activo
     standardQuizButton.classList.add('active'); 
 
-    // Obtener la lista de archivos .txt de la carpeta "Decks" desde GitHub
     fetch('https://api.github.com/repos/juanjmorenot/juanjmorenot.github.io/contents/Decks')
       .then(response => {
         if (!response.ok) {
@@ -91,7 +89,6 @@
         selectDeckMessage.textContent = 'Error al cargar los decks';
       });
 
-    // Manejar el cambio de selección en el elemento "select"
     deckSelect.addEventListener('change', () => {
       const selectedDeck = deckSelect.value;
 
@@ -116,8 +113,6 @@
       }
     });
 
-
-    // Event listeners para los botones de modo
     standardQuizButton.addEventListener('click', () => {
       standardQuizMode = true;
       memorizeMode = false;
@@ -142,15 +137,69 @@
       resetQuiz(); 
     });
 
-    // ... (funciones: flipCard, nextCard, previousCard, shuffle, updateCardCount, playSound, parseDeck - Mantén tu código existente)
+    function flipCard() {
+      if (!memorizeMode) { 
+        showingFront = !showingFront;
+        showCard();
+      }
+    }
+
+    function nextCard() {
+      cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
+      showingFront = !reverseQuizMode; // Ajustar para Reverse Quiz
+      showCard();
+      updateCardCount();
+      updateButtonStates(); 
+    }
+
+    function previousCard() {
+      cardsSeen = Math.max(cardsSeen - 1, 1);
+      showingFront = !reverseQuizMode; // Ajustar para Reverse Quiz
+      showCard();
+      updateCardCount();
+      updateButtonStates();
+    }
+
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]
+        ];
+      }
+      return array;
+    }
+
+    function updateCardCount() {
+      cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
+    }
+
+    function playSound() {
+      const buttonSound = document.getElementById('buttonSound');
+      buttonSound.currentTime = 0;
+      buttonSound.volume = 0.6;
+      buttonSound.play();
+    }
+
+    function parseDeck(text) {
+      const lines = text.split('\n');
+      const cards = [];
+      lines.forEach(line => {
+        const [front, back] = line.split('|');
+        if (front && back) {
+          cards.push({ front: front.trim(), back: back.trim() });
+        }
+      });
+      return cards;
+    }
 
     function updateModeButtons() {
       standardQuizButton.classList.toggle('active', standardQuizMode);
       memorizeButton.classList.toggle('active', memorizeMode);
       reverseQuizButton.classList.toggle('active', reverseQuizMode);
-
-      // Deshabilitar/habilitar el botón "Flip" según el modo
-      flipButton.disabled = memorizeMode; 
+      flipButton.disabled = memorizeMode;
     }
 
     function showCard() {
@@ -162,7 +211,6 @@
             ? `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`
             : `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`;
         } else if (memorizeMode) {
-          // Mostrar pregunta y respuesta juntas en modo "Memorize"
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         } else if (reverseQuizMode) {
           cardText.innerHTML = showingFront
@@ -177,7 +225,7 @@
     function resetQuiz() {
       currentCard = 0;
       cardsSeen = 1;
-      showingFront = true; // Asegurar que se muestre el frente al reiniciar
+      showingFront = true; 
       showCard();
       updateCardCount();
       updateButtonStates();
