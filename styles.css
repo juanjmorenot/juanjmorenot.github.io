@@ -19,7 +19,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .top-bar .title {
@@ -28,9 +28,9 @@ body {
   font-family: 'Cabin', sans-serif;
 }
 
-.top-bar .top-buttons { 
+.top-bar .top-buttons {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .top-bar .top-buttons #deckSelect {
@@ -44,13 +44,13 @@ body {
   transition: background-color 0.3s ease;
   margin-left: 10px;
   font-family: 'Cabin', sans-serif;
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 24 24' width='24px' height='24px'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right .7em center;
-  background-size: .65em auto, 100%; 
+  background-size: .65em auto, 100%;
 }
 
 .top-bar .top-buttons #deckSelect:hover {
@@ -78,10 +78,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 140px; 
+  padding-top: 140px;
   width: 100%;
   box-sizing: border-box;
-  height: 100vh; 
+  height: 100vh;
 }
 
 .mode-buttons {
@@ -98,9 +98,9 @@ body {
   position: relative;
   width: 300px;
   margin-top: 0px;
-  display: flex; 
+  display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .card::before {
@@ -132,30 +132,30 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; 
+  height: 100%;
 }
 
 .card-text .question {
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   border: 2px solid #bcbcbc;
-  border-radius: 16px; 
-  padding: 20px; 
-  width: 90%; 
-  box-sizing: border-box; 
-  margin-bottom: 5px; 
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
 .card-text .answer {
   background-color: #fffcd4;
   border: 2px solid #ffde00;
-  border-radius: 16px; 
+  border-radius: 16px;
   padding: 20px;
-  width: 90%; 
-  box-sizing: border-box; 
+  width: 90%;
+  box-sizing: border-box;
   margin-top: 5px;
 }
 
-.card-buttons { 
+.card-buttons {
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -189,8 +189,8 @@ button:hover {
 }
 
 /* Estilo único para los botones de modo */
-#standardQuizButton, 
-#memorizeButton, 
+#standardQuizButton,
+#memorizeButton,
 #reverseQuizButton {
   background-color: #d9d9d9;
   color: black;
@@ -211,5 +211,5 @@ button:hover {
 
 #selectDeckMessage {
   font-family: 'Cabin', sans-serif;
-  color: #ccc; 
+  color: #ccc;
 }
