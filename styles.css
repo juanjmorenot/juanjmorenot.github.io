@@ -87,7 +87,7 @@ body {
 .mode-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px; /* Margen inferior reducido a la mitad */
 }
 
 .card {
