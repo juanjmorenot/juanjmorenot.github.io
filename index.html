@@ -50,7 +50,7 @@
     let showingFront = true;
     let shuffledCards = [];
     let cardsSeen = 0;
-    let standardQuizMode = true; 
+    let standardQuizMode = true;
     let memorizeMode = false;
     let reverseQuizMode = false;
 
@@ -65,7 +65,7 @@
     const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
     const nextButton = document.querySelector('.card-buttons button:last-child');
 
-    standardQuizButton.classList.add('active'); 
+    standardQuizButton.classList.add('active');
 
     fetch('https://api.github.com/repos/juanjmorenot/juanjmorenot.github.io/contents/Decks')
       .then(response => {
@@ -134,11 +134,11 @@
       memorizeMode = false;
       reverseQuizMode = true;
       updateModeButtons();
-      resetQuiz(); 
+      resetQuiz();
     });
 
     function flipCard() {
-      if (!memorizeMode) { 
+      if (!memorizeMode) {
         showingFront = !showingFront;
         showCard();
       }
@@ -146,15 +146,15 @@
 
     function nextCard() {
       cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-      showingFront = !reverseQuizMode; 
+      showingFront = true; // Mostrar el "frente" al avanzar (pregunta en Standard, respuesta en Reverse)
       showCard();
       updateCardCount();
-      updateButtonStates(); 
+      updateButtonStates();
     }
 
     function previousCard() {
       cardsSeen = Math.max(cardsSeen - 1, 1);
-      showingFront = !reverseQuizMode;
+      showingFront = true; // Mostrar el "frente" al retroceder
       showCard();
       updateCardCount();
       updateButtonStates();
@@ -199,7 +199,7 @@
       standardQuizButton.classList.toggle('active', standardQuizMode);
       memorizeButton.classList.toggle('active', memorizeMode);
       reverseQuizButton.classList.toggle('active', reverseQuizMode);
-      flipButton.disabled = memorizeMode; 
+      flipButton.disabled = memorizeMode;
     }
 
     function showCard() {
@@ -207,13 +207,11 @@
         const card = shuffledCards[cardsSeen - 1];
 
         if (standardQuizMode) {
-          cardText.textContent = showingFront ? card.front : card.back; 
+          cardText.textContent = showingFront ? card.front : card.back;
         } else if (memorizeMode) {
           cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
         } else if (reverseQuizMode) {
-          cardText.innerHTML = showingFront 
-            ? `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`
-            : `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
+          cardText.textContent = showingFront ? card.back : card.front;
         }
       } else {
         cardText.textContent = " ";
@@ -223,7 +221,7 @@
     function resetQuiz() {
       currentCard = 0;
       cardsSeen = 1;
-      showingFront = true; 
+      showingFront = true;
       showCard();
       updateCardCount();
       updateButtonStates();
