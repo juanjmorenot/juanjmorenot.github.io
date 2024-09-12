@@ -4,213 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flashcards</title>
-  <style>
-    body {
-      background-color: #c4b5fd;
-      display: flex;
-      justify-content: center;
-      align-items: center; 
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    .top-bar {
-      background-color: #fff;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      box-sizing: border-box;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10; 
-    }
-
-    .top-bar .title {
-      font-size: 1.8rem;
-      font-weight: bold;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    .top-bar .top-buttons { 
-      display: flex;
-      align-items: center; 
-    }
-
-    .top-bar .top-buttons #deckSelect {
-      background-color: transparent;
-      color: #3a3a3a;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-left: 10px;
-      font-family: 'Cabin', sans-serif;
-      -webkit-appearance: none; 
-      -moz-appearance: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 24 24' width='24px' height='24px'><path d='M7 10l5 5 5-5z'/></svg>");
-      background-repeat: no-repeat;
-      background-position: right .7em center;
-      background-size: .65em auto, 100%; 
-    }
-
-    .top-bar .top-buttons #deckSelect:hover {
-      background-color: #f0f0f0;
-    }
-
-    .top-bar .top-buttons button {
-      background-color: transparent;
-      color: #3a3a3a;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-left: 10px;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    .top-bar .top-buttons button:hover {
-      background-color: #f0f0f0;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 140px; 
-      width: 100%;
-      box-sizing: border-box;
-      height: 100vh; 
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 24px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      position: relative;
-      width: 300px;
-      margin-top: 0px;
-      display: flex; 
-      justify-content: center;
-      align-items: center; 
-    }
-
-    .card::before {
-      content: "";
-      display: block;
-      padding-top: 133.33%;
-    }
-
-    .card-content {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .card-text {
-      font-size: 1rem;
-      text-align: center;
-      font-weight: 100;
-      padding: 0 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%; 
-    }
-
-    .card-text .question {
-      background-color: #f9f9f9; 
-      border: 2px solid #bcbcbc;
-      border-radius: 16px; 
-      padding: 20px; 
-      width: 90%; 
-      box-sizing: border-box; 
-      margin-bottom: 5px; 
-    }
-
-    .card-text .answer {
-      background-color: #fffcd4;
-      border: 2px solid #ffde00;
-      border-radius: 16px; 
-      padding: 20px;
-      width: 90%; 
-      box-sizing: border-box; 
-      margin-top: 5px;
-    }
-
-    .card-buttons { 
-      display: flex;
-      justify-content: space-between;
-      width: 85%;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-
-    .card-buttons button {
-      background-color: #e0d9ff;
-      color: #3a3a3a;
-      border: none;
-      padding: 16px 20px;
-      border-radius: 16px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    button:hover {
-      background-color: #d6d1ff;
-    }
-
-    #cardCount {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    /* Estilo único para el botón Memorize */
-    #memorizeButton {
-      background-color: #d9d9d9;
-      color: black;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    /* Estilo para el modo Memorize activo */
-    #memorizeButton.active {
-      background-color: lightgreen;
-    }
-
-    #selectDeckMessage {
-      font-family: 'Cabin', sans-serif;
-      color: #ccc; 
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
@@ -228,8 +22,9 @@
   </div>
 
   <div class="container">
-    <div class="memorize-button-container">
+    <div class="mode-buttons">
       <button id="memorizeButton">Memorize</button>
+      <button id="reverseQuizButton">Reverse Quiz</button>
     </div>
     <div class="card">
       <div id="cardCount"></div>
@@ -255,10 +50,12 @@
     let shuffledCards = [];
     let cardsSeen = 0;
     let studyMode = false;
+    let reverseQuizMode = false;
 
     const deckSelect = document.getElementById('deckSelect');
     const cardCountDisplay = document.getElementById('cardCount');
     const memorizeButton = document.getElementById('memorizeButton');
+    const reverseQuizButton = document.getElementById('reverseQuizButton');
     const cardText = document.getElementById('cardText');
     const selectDeckMessage = document.getElementById('selectDeckMessage');
     const backButton = document.querySelector('.card-buttons button:first-child');
@@ -315,84 +112,71 @@
 
     memorizeButton.addEventListener('click', () => {
       studyMode = !studyMode;
-
       if (studyMode) {
-        // Agregar la clase "active" para cambiar el estilo
         memorizeButton.classList.add('active');
-        currentCard = 0;
-        showCard();
-        updateCardCount();
-        backButton.disabled = false;
-        nextButton.disabled = false;
-        flipButton.disabled = true;
+        reverseQuizButton.classList.remove('active');
+        reverseQuizMode = false; 
       } else {
-        // Quitar la clase "active" para volver al estilo normal
         memorizeButton.classList.remove('active');
-        cardsSeen = 1;
-        showingFront = true;
-        showCard();
-        updateCardCount();
-        backButton.disabled = shuffledCards.length === 0 || cardsSeen === 1;
-        nextButton.disabled = shuffledCards.length === 0 || cardsSeen === shuffledCards.length;
-        flipButton.disabled = false;
       }
+      currentCard = 0;
+      showingFront = true; // Asegurar que se muestra el frente al cambiar de modo
+      showCard();
+      updateCardCount();
+      updateButtonStates();
+    });
+
+    reverseQuizButton.addEventListener('click', () => {
+      reverseQuizMode = !reverseQuizMode;
+      if (reverseQuizMode) {
+        reverseQuizButton.classList.add('active');
+        memorizeButton.classList.remove('active');
+        studyMode = false; // Asegurar que Memorize se desactiva
+      } else {
+        reverseQuizButton.classList.remove('active');
+      }
+      currentCard = 0;
+      showingFront = false; // Mostrar la respuesta primero en Reverse Quiz
+      showCard();
+      updateCardCount();
+      updateButtonStates();
     });
 
     function showCard() {
-      if (studyMode) {
-        if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-          const card = shuffledCards[cardsSeen - 1];
-          cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
+      if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
+        const card = shuffledCards[cardsSeen - 1];
+        if (reverseQuizMode) {
+          // Mostrar respuesta primero en Reverse Quiz
+          cardText.innerHTML = `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`;
         } else {
-          cardText.textContent = " ";
+          cardText.innerHTML = showingFront ? `<div class="question">${card.front}</div><div class="answer">${card.back}</div>` : `<div class="answer">${card.back}</div><div class="question">${card.front}</div>`;
         }
       } else {
-        if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-          const card = shuffledCards[cardsSeen - 1];
-          cardText.textContent = showingFront ? card.front : card.back;
-        } else {
-          cardText.textContent = " ";
-        }
+        cardText.textContent = " ";
       }
     }
 
     function flipCard() {
-      if (!studyMode) {
+      if (!studyMode && !reverseQuizMode) { 
         showingFront = !showingFront;
         showCard();
       }
     }
 
     function nextCard() {
-      if (studyMode) {
-        cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-        showCard();
-        updateCardCount();
-        nextButton.disabled = cardsSeen === shuffledCards.length;
-      } else {
-        cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-        showingFront = true;
-        showCard();
-        updateCardCount();
-        nextButton.disabled = cardsSeen === shuffledCards.length;
-        backButton.disabled = false;
-      }
+      cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
+      showingFront = reverseQuizMode ? false : true; // Ajustar para Reverse Quiz
+      showCard();
+      updateCardCount();
+      updateButtonStates(); 
     }
 
     function previousCard() {
-      if (studyMode) {
-        cardsSeen = Math.max(cardsSeen - 1, 1);
-        showCard();
-        updateCardCount();
-        backButton.disabled = cardsSeen === 1;
-      } else {
-        cardsSeen = Math.max(cardsSeen - 1, 1);
-        showingFront = true;
-        showCard();
-        updateCardCount();
-        backButton.disabled = cardsSeen === 1;
-        nextButton.disabled = false;
-      }
+      cardsSeen = Math.max(cardsSeen - 1, 1);
+      showingFront = reverseQuizMode ? false : true; // Ajustar para Reverse Quiz
+      showCard();
+      updateCardCount();
+      updateButtonStates();
     }
 
     function shuffle(array) {
@@ -428,6 +212,12 @@
         }
       });
       return cards;
+    }
+
+    function updateButtonStates() {
+      backButton.disabled = cardsSeen === 1;
+      nextButton.disabled = cardsSeen === shuffledCards.length;
+      flipButton.disabled = studyMode || reverseQuizMode;
     }
   </script>
 </body>
