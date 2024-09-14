@@ -1,11 +1,57 @@
 body {
   background-color: #c4b5fd;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Alinea el contenido al principio */
   align-items: center;
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
+}
+
+/* Estilos del sidebar */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px; /* Oculto por defecto */
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 11;
+}
+
+.sidebar.active {
+  left: 0; /* Mostrar al activar */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Estilos para el contenedor principal */
+.main-content {
+  transition: 0.5s;
+  margin-left: 0; 
+  width: 100%; /* Ocupa el ancho completo disponible */
+  box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+.sidebar.active ~ .main-content {
+  margin-left: 250px;
 }
 
 .top-bar {
@@ -41,7 +87,7 @@ body {
 .mode-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .card {
@@ -234,53 +280,13 @@ button:hover {
   left: 50%;
 }
 
-/* Estilos del sidebar */
-.sidebar {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: -250px;
-  background-color: #fff;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  z-index: 11;
-}
-
-.sidebar.active {
-  left: 0;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar li {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-}
-
-.sidebar li:hover {
-  background-color: #f5f5f5;
-}
-
-/* Ocultar el select original */
-#deckSelect {
-  display: none;
-}
-
-/* Adaptar para pantallas pequeñas */
+/* Media Queries para responsividad */
 @media screen and (max-width: 768px) {
-  .top-bar {
-    flex-direction: row-reverse; 
-    padding: 10px; 
+  .sidebar {
+    width: 75px;
   }
 
-  .title {
-    font-size: 1.5rem;
+  .sidebar.active ~ .main-content {
+    margin-left: 75px; 
   }
 }
