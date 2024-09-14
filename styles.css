@@ -15,11 +15,11 @@ body {
   width: 250px;
   position: fixed; 
   top: 0;
-  left: -250px;
+  left: -250px; 
   background-color: #fff;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 70px; /* Espacio para el título */
   z-index: 11;
 }
 
@@ -44,6 +44,10 @@ body {
   background-color: #f5f5f5;
 }
 
+.sidebar h2 {
+  padding-left: 20px; /* Espacio a la izquierda del título */
+}
+
 /* Estilos para el contenedor principal */
 .main-content {
   transition: 0.5s;
@@ -54,7 +58,7 @@ body {
 }
 
 .sidebar.active ~ .main-content {
-  margin-left: 250px; 
+  margin-left: 250px;
 }
 
 .top-bar {
@@ -269,10 +273,14 @@ button:hover {
 /* Media Queries para responsividad */
 @media screen and (max-width: 768px) {
   .sidebar {
-    width: 75px;
+    width: 100%; 
   }
 
   .sidebar.active ~ .main-content {
-    margin-left: 75px; 
+    margin-left: 0; 
+    position: absolute; 
+    left: 0;
+    width: 100%;
+    z-index: 0;
   }
 }
