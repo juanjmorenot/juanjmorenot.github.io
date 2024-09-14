@@ -16,11 +16,11 @@ body {
   position: fixed; 
   top: 0;
   left: -250px; 
-  background-color: #fff;
+  background-color: #fff; /* Fondo blanco para el sidebar */
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 70px; /* Espacio para el título */
-  z-index: 11; /* El sidebar se muestra encima del contenido */
+  padding-top: 70px; 
+  z-index: 11;
 }
 
 .sidebar.active {
@@ -45,7 +45,7 @@ body {
 }
 
 .sidebar h2 {
-  padding-left: 20px; /* Espacio a la izquierda del título */
+  padding-left: 20px;
 }
 
 /* Estilos para el contenedor principal */
