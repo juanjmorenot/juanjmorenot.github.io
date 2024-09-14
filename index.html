@@ -1,233 +1,278 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flashcards</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="sidebar" id="sidebar"> 
-    <ul id="deckList">
-    </ul>
-  </div>
+body {
+  background-color: #c4b5fd;
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+  overflow-x: hidden; 
+}
 
-  <div class="main-content">
-    <div class="top-bar">
-      <div class="menu-icon" id="menuIcon">
-        <span></span>
-        <span></span>
-        <span></span> 
-      </div> 
-      <div class="title">Flashcards</div>
-    </div>
+/* Estilos del sidebar */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed; 
+  top: 0;
+  left: -250px;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 11;
+}
 
-    <div class="container">
-      <div class="mode-buttons">
-        <button id="standardQuizButton">Standard Quiz</button>
-        <button id="memorizeButton">Memorize</button>
-        <button id="reverseQuizButton">Reverse Quiz</button>
-      </div>
-      <div class="card">
-        <div id="cardCount"></div>
-        <div class="card-content">
-          <div class="card-text" id="cardText">
-            <span id="selectDeckMessage">Select your Deck to study...</span>
-          </div>
-          <div class="card-buttons">
-            <button onclick="previousCard(); playSound()">Back</button>
-            <button onclick="flipCard(); playSound()">Flip</button>
-            <button onclick="nextCard(); playSound()">Next</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+.sidebar.active {
+  left: 0; 
+}
 
-  <audio id="buttonSound" src="analog-appliance-button.mp3"></audio>
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  <script>
-    let cards = [];
-    let currentCard = 0;
-    let showingFront = true;
-    let shuffledCards = [];
-    let cardsSeen = 0;
-    let standardQuizMode = true;
-    let memorizeMode = false;
-    let reverseQuizMode = false;
+.sidebar li {
+  padding: 16px 20px; 
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 1rem; 
+}
 
-    const cardCountDisplay = document.getElementById('cardCount');
-    const standardQuizButton = document.getElementById('standardQuizButton');
-    const memorizeButton = document.getElementById('memorizeButton');
-    const reverseQuizButton = document.getElementById('reverseQuizButton');
-    const cardText = document.getElementById('cardText');
-    const selectDeckMessage = document.getElementById('selectDeckMessage');
-    const backButton = document.querySelector('.card-buttons button:first-child');
-    const flipButton = document.querySelector('.card-buttons button:nth-child(2)');
-    const nextButton = document.querySelector('.card-buttons button:last-child');
+.sidebar li:hover {
+  background-color: #f5f5f5;
+}
 
-    // Menú hamburguesa y sidebar
-    const menuIcon = document.getElementById('menuIcon');
-    const sidebar = document.getElementById('sidebar');
-    const deckList = document.getElementById('deckList');
+/* Estilos para el contenedor principal */
+.main-content {
+  transition: 0.5s;
+  margin-left: 0;
+  width: 100%; 
+  height: 100%; 
+  box-sizing: border-box;
+}
 
-    menuIcon.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
+.sidebar.active ~ .main-content {
+  margin-left: 250px; 
+}
 
-    fetch('https://api.github.com/repos/juanjmorenot/juanjmorenot.github.io/contents/Decks')
-      .then(response => response.json())
-      .then(files => {
-        const txtFiles = files.filter(file => file.name.endsWith('.txt'));
-        txtFiles.forEach(file => {
-          const listItem = document.createElement('li');
-          listItem.textContent = file.name;
-          listItem.addEventListener('click', () => loadDeck(file.download_url));
-          deckList.appendChild(listItem);
-        });
-      })
-      .catch(error => console.error('Error al cargar los decks:', error));
+.top-bar {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
 
-    function loadDeck(deckURL) {
-      fetch(deckURL)
-        .then(response => response.text())
-        .then(text => {
-          cards = parseDeck(text);
-          shuffledCards = shuffle(cards);
-          cardsSeen = 1;
-          showCard();
-          updateCardCount();
-          selectDeckMessage.style.display = 'none';
-          sidebar.classList.remove('active'); 
-        })
-        .catch(error => {
-          console.error('Error al cargar el deck:', error);
-          selectDeckMessage.textContent = 'Error al cargar el deck';
-        });
-    }
+.top-bar .title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Cabin', sans-serif;
+}
 
-    standardQuizButton.classList.add('active');
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100vh;
+}
 
-    standardQuizButton.addEventListener('click', () => {
-      standardQuizMode = true;
-      memorizeMode = false;
-      reverseQuizMode = false;
-      updateModeButtons();
-      resetQuiz();
-    });
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px; 
+}
 
-    memorizeButton.addEventListener('click', () => {
-      standardQuizMode = false;
-      memorizeMode = true;
-      reverseQuizMode = false;
-      updateModeButtons();
-      resetQuiz();
-    });
+.card {
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  width: 300px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    reverseQuizButton.addEventListener('click', () => {
-      standardQuizMode = false;
-      memorizeMode = false;
-      reverseQuizMode = true;
-      updateModeButtons();
-      resetQuiz();
-    });
+.card::before {
+  content: "";
+  display: block;
+  padding-top: 133.33%;
+}
 
-    function flipCard() {
-      if (!memorizeMode) {
-        showingFront = !showingFront;
-        showCard();
-      }
-    }
+.card-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-    function nextCard() {
-      cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-      showingFront = true; 
-      showCard();
-      updateCardCount();
-      updateButtonStates();
-    }
+.card-text {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 100;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-    function previousCard() {
-      cardsSeen = Math.max(cardsSeen - 1, 1);
-      showingFront = true;
-      showCard();
-      updateCardCount();
-      updateButtonStates();
-    }
+.card-text .question {
+  background-color: #f9f9f9;
+  border: 2px solid #bcbcbc;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
 
-    function shuffle(array) {
-      let currentIndex = array.length, randomIndex;
-      while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]
-        ];
-      }
-      return array;
-    }
+.card-text .answer {
+  background-color: #fffcd4;
+  border: 2px solid #ffde00;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
 
-    function updateCardCount() {
-      cardCountDisplay.textContent = "Card Count: " + cardsSeen + "/" + shuffledCards.length;
-    }
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 
-    function playSound() {
-      const buttonSound = document.getElementById('buttonSound');
-      buttonSound.currentTime = 0;
-      buttonSound.volume = 0.6;
-      buttonSound.play();
-    }
+.card-buttons button {
+  background-color: #e0d9ff;
+  color: #3a3a3a;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Cabin', sans-serif;
+}
 
-    function parseDeck(text) {
-      const lines = text.split('\n');
-      const cards = [];
-      lines.forEach(line => {
-        const [front, back] = line.split('|');
-        if (front && back) {
-          cards.push({ front: front.trim(), back: back.trim() });
-        }
-      });
-      return cards;
-    }
+button:hover {
+  background-color: #d6d1ff;
+}
 
-    function updateModeButtons() {
-      standardQuizButton.classList.toggle('active', standardQuizMode);
-      memorizeButton.classList.toggle('active', memorizeMode);
-      reverseQuizButton.classList.toggle('active', reverseQuizMode);
-      flipButton.disabled = memorizeMode;
-    }
+#cardCount {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
-    function showCard() {
-      if (shuffledCards.length > 0 && cardsSeen <= shuffledCards.length) {
-        const card = shuffledCards[cardsSeen - 1];
-        if (standardQuizMode) {
-          cardText.textContent = showingFront ? card.front : card.back;
-        } else if (memorizeMode) {
-          cardText.innerHTML = `<div class="question">${card.front}</div><div class="answer">${card.back}</div>`;
-        } else if (reverseQuizMode) {
-          cardText.textContent = showingFront ? card.back : card.front;
-        }
-      } else {
-        cardText.textContent = " ";
-      }
-    }
+/* Estilo único para los botones de modo */
+#standardQuizButton,
+#memorizeButton,
+#reverseQuizButton {
+  background-color: #d9d9d9;
+  color: black;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Cabin', sans-serif;
+}
 
-    function resetQuiz() {
-      currentCard = 0;
-      cardsSeen = 1;
-      showingFront = true;
-      showCard();
-      updateCardCount();
-      updateButtonStates();
-    }
+/* Estilo para el modo activo (verde) */
+#standardQuizButton.active,
+#memorizeButton.active,
+#reverseQuizButton.active {
+  background-color: lightgreen;
+}
 
-    function updateButtonStates() {
-      backButton.disabled = cardsSeen === 1;
-      nextButton.disabled = cardsSeen === shuffledCards.length;
-    }
-  </script>
-</body>
-</html>
+#selectDeckMessage {
+  font-family: 'Cabin', sans-serif;
+  color: #ccc;
+}
+
+/* Estilos del menú hamburguesa */
+.menu-icon {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  margin-left: 20px;
+}
+
+.menu-icon span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #333; 
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  transition: 0.25s ease-in-out;
+}
+
+.menu-icon span:nth-child(1) {
+  top: 2px;
+}
+
+.menu-icon span:nth-child(2) {
+  top: 9px; 
+}
+
+.menu-icon span:nth-child(3) {
+  top: 16px; 
+}
+
+/* Animación del menú */
+.menu-icon.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 8px; 
+}
+
+.menu-icon.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 8px;
+}
+
+/* Media Queries para responsividad */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 75px;
+  }
+
+  .sidebar.active ~ .main-content {
+    margin-left: 75px; 
+  }
+}
