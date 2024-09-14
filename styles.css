@@ -58,7 +58,7 @@ body {
 }
 
 .sidebar.active ~ .main-content {
-  margin-left: 250px;
+  margin-left: 250px; 
 }
 
 .top-bar {
@@ -86,7 +86,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
-  width: 100%;
+  width: 100%; /* Ancho responsive */
   box-sizing: border-box;
   height: 100vh;
 }
@@ -94,7 +94,7 @@ body {
 .mode-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .card {
@@ -282,5 +282,11 @@ button:hover {
     left: 0;
     width: 100%;
     z-index: 0; /* El contenido principal se queda detrás del sidebar */
+  }
+
+  .container {
+    width: 100%; 
+    padding-left: 20px; 
+    padding-right: 20px; 
   }
 }
