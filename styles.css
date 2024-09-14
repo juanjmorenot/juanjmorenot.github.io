@@ -20,7 +20,7 @@ body {
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 70px; /* Espacio para el título */
-  z-index: 11;
+  z-index: 11; /* El sidebar se muestra encima del contenido */
 }
 
 .sidebar.active {
@@ -281,6 +281,6 @@ button:hover {
     position: absolute; 
     left: 0;
     width: 100%;
-    z-index: 0;
+    z-index: 0; /* El contenido principal se queda detrás del sidebar */
   }
 }
