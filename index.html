@@ -12,7 +12,7 @@
 <body>
   <div class="sidebar" id="sidebar"> 
     <ul id="deckList">
-      </ul>
+    </ul>
   </div>
 
   <div class="main-content">
@@ -20,8 +20,8 @@
       <div class="menu-icon" id="menuIcon">
         <span></span>
         <span></span>
-        <span></span>
-      </div>
+        <span></span> 
+      </div> 
       <div class="title">Flashcards</div>
     </div>
 
@@ -101,7 +101,7 @@
           showCard();
           updateCardCount();
           selectDeckMessage.style.display = 'none';
-          sidebar.classList.remove('active'); // Cierra el sidebar después de cargar
+          sidebar.classList.remove('active'); 
         })
         .catch(error => {
           console.error('Error al cargar el deck:', error);
@@ -144,7 +144,7 @@
 
     function nextCard() {
       cardsSeen = Math.min(cardsSeen + 1, shuffledCards.length);
-      showingFront = true;
+      showingFront = true; 
       showCard();
       updateCardCount();
       updateButtonStates();

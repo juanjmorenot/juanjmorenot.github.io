@@ -1,11 +1,12 @@
 body {
   background-color: #c4b5fd;
   display: flex;
-  justify-content: flex-start; /* Alinea el contenido al principio */
+  justify-content: flex-start; 
   align-items: center;
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
+  overflow-x: hidden; 
 }
 
 /* Estilos del sidebar */
@@ -14,7 +15,7 @@ body {
   width: 250px;
   position: fixed;
   top: 0;
-  left: -250px; /* Oculto por defecto */
+  left: -250px; 
   background-color: #fff;
   overflow-x: hidden;
   transition: 0.5s;
@@ -23,7 +24,7 @@ body {
 }
 
 .sidebar.active {
-  left: 0; /* Mostrar al activar */
+  left: 0; 
 }
 
 .sidebar ul {
@@ -33,9 +34,10 @@ body {
 }
 
 .sidebar li {
-  padding: 10px;
+  padding: 16px 20px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
+  font-size: 1rem; 
 }
 
 .sidebar li:hover {
@@ -45,9 +47,9 @@ body {
 /* Estilos para el contenedor principal */
 .main-content {
   transition: 0.5s;
-  margin-left: 0; 
-  width: 100%; /* Ocupa el ancho completo disponible */
-  box-sizing: border-box; /* Incluye padding y border en el ancho */
+  margin-left: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sidebar.active ~ .main-content {
@@ -217,10 +219,11 @@ button:hover {
 /* Estilos del menú hamburguesa */
 .menu-icon {
   width: 30px;
-  height: 25px;
+  height: 20px;
   position: relative;
   cursor: pointer;
-  display: block; 
+  display: block;
+  margin-left: 20px;
 }
 
 .menu-icon span {
@@ -228,56 +231,38 @@ button:hover {
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #3a3a3a;
-  border-radius: 9px;
+  background: #333; 
+  border-radius: 3px;
   opacity: 1;
   left: 0;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
 .menu-icon span:nth-child(1) {
-  top: 0px;
+  top: 2px;
 }
 
-.menu-icon span:nth-child(2), .menu-icon span:nth-child(3) {
-  top: 10px;
+.menu-icon span:nth-child(2) {
+  top: 9px;
 }
 
-.menu-icon span:nth-child(4) {
-  top: 20px;
+.menu-icon span:nth-child(3) {
+  top: 16px; 
 }
 
+/* Animación del menú */
 .menu-icon.active span:nth-child(1) {
-  top: 8px;
-  width: 0%;
-  left: 50%;
+  transform: rotate(45deg);
+  top: 8px; 
 }
 
 .menu-icon.active span:nth-child(2) {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+  opacity: 0; 
 }
 
 .menu-icon.active span:nth-child(3) {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
-}
-
-.menu-icon.active span:nth-child(4) {
   top: 8px;
-  width: 0%;
-  left: 50%;
 }
 
 /* Media Queries para responsividad */
