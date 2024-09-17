@@ -1,67 +1,13 @@
 body {
   background-color: #c4b5fd;
   display: flex;
-  justify-content: flex-start; 
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
   font-family: 'Cabin', sans-serif;
-  overflow-x: hidden; 
-}
-
-/* Estilos del sidebar */
-.sidebar {
-  height: 100%;
-  width: 250px;
-  position: fixed; 
-  top: 0;
-  left: -250px; 
-  background-color: #fff;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 70px; /* Espacio para el título */
-  z-index: 11; /* El sidebar se muestra encima del contenido */
-}
-
-.sidebar.active {
-  left: 0; 
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar li {
-  padding: 16px 20px; 
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  font-size: 1rem; 
-}
-
-.sidebar li:hover {
-  background-color: #f5f5f5;
-}
-
-.sidebar h2 {
-  padding-left: 20px; /* Espacio a la izquierda del título */
-}
-
-/* Estilos para el contenedor principal */
-.main-content {
-  transition: 0.5s;
-  margin-left: 0;
-  width: 100%; 
-  height: 100%; 
-  box-sizing: border-box;
-}
-
-.sidebar.active ~ .main-content {
-  margin-left: 250px;
-}
-
-.top-bar {
+  }
+  .top-bar {
   background-color: #fff;
   width: 100%;
   display: flex;
@@ -73,15 +19,54 @@ body {
   top: 0;
   left: 0;
   z-index: 10;
-}
-
-.top-bar .title {
+  }
+  .top-bar .title {
   font-size: 1.8rem;
   font-weight: bold;
   font-family: 'Cabin', sans-serif;
-}
-
-.container {
+  }
+  .top-bar .top-buttons {
+  display: flex;
+  align-items: center;
+  }
+  .top-bar .top-buttons #deckSelect {
+  background-color: transparent;
+  color: #3a3a3a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  font-family: 'Cabin', sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24px' height='24px'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right .7em center;
+  background-size: .65em auto, 100%;
+  }
+  .top-bar .top-buttons #deckSelect:hover {
+  background-color: #f0f0f0;
+  }
+  .top-bar .top-buttons button {
+  background-color: transparent;
+  color: #3a3a3a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  font-family: 'Cabin', sans-serif;
+  }
+  .top-bar .top-buttons button:hover {
+  background-color: #f0f0f0;
+  }
+  .container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,15 +74,13 @@ body {
   width: 100%;
   box-sizing: border-box;
   height: 100vh;
-}
-
-.mode-buttons {
+  }
+  .mode-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px; 
-}
-
-.card {
+  margin-bottom: 20px; /* Margen inferior reducido a la mitad */
+  }
+  .card {
   background-color: white;
   border-radius: 24px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -108,15 +91,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.card::before {
+  }
+  .card::before {
   content: "";
   display: block;
   padding-top: 133.33%;
-}
-
-.card-content {
+  }
+  .card-content {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -128,9 +109,8 @@ body {
   justify-content: space-between;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.card-text {
+  }
+  .card-text {
   font-size: 1rem;
   text-align: center;
   font-weight: 100;
@@ -140,9 +120,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-}
-
-.card-text .question {
+  }
+  .card-text .question {
   background-color: #f9f9f9;
   border: 2px solid #bcbcbc;
   border-radius: 16px;
@@ -150,9 +129,8 @@ body {
   width: 90%;
   box-sizing: border-box;
   margin-bottom: 5px;
-}
-
-.card-text .answer {
+  }
+  .card-text .answer {
   background-color: #fffcd4;
   border: 2px solid #ffde00;
   border-radius: 16px;
@@ -160,17 +138,15 @@ body {
   width: 90%;
   box-sizing: border-box;
   margin-top: 5px;
-}
-
-.card-buttons {
+  }
+  .card-buttons {
   display: flex;
   justify-content: space-between;
   width: 85%;
   margin-top: 4px;
   margin-bottom: 4px;
-}
-
-.card-buttons button {
+  }
+  .card-buttons button {
   background-color: #e0d9ff;
   color: #3a3a3a;
   border: none;
@@ -180,25 +156,22 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-family: 'Cabin', sans-serif;
-}
-
-button:hover {
+  }
+  button:hover {
   background-color: #d6d1ff;
-}
-
-#cardCount {
+  }
+  #cardCount {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 10px;
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-/* Estilo único para los botones de modo */
-#standardQuizButton,
-#memorizeButton,
-#reverseQuizButton {
+  }
+  /* Estilo único para los botones de modo */
+  #standardQuizButton,
+  #memorizeButton,
+  #reverseQuizButton {
   background-color: #d9d9d9;
   color: black;
   border: none;
@@ -207,80 +180,14 @@ button:hover {
   font-size: 1rem;
   cursor: pointer;
   font-family: 'Cabin', sans-serif;
-}
-
-/* Estilo para el modo activo (verde) */
-#standardQuizButton.active,
-#memorizeButton.active,
-#reverseQuizButton.active {
+  }
+  /* Estilo para el modo activo (verde) */
+  #standardQuizButton.active,
+  #memorizeButton.active,
+  #reverseQuizButton.active {
   background-color: lightgreen;
-}
-
-#selectDeckMessage {
+  }
+  #selectDeckMessage {
   font-family: 'Cabin', sans-serif;
   color: #ccc;
-}
-
-/* Estilos del menú hamburguesa */
-.menu-icon {
-  width: 30px;
-  height: 20px;
-  position: relative;
-  cursor: pointer;
-  display: block;
-  margin-left: 20px;
-}
-
-.menu-icon span {
-  display: block;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #333; 
-  border-radius: 3px;
-  opacity: 1;
-  left: 0;
-  transition: 0.25s ease-in-out;
-}
-
-.menu-icon span:nth-child(1) {
-  top: 2px;
-}
-
-.menu-icon span:nth-child(2) {
-  top: 9px; 
-}
-
-.menu-icon span:nth-child(3) {
-  top: 16px; 
-}
-
-/* Animación del menú */
-.menu-icon.active span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 8px; 
-}
-
-.menu-icon.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-icon.active span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 8px;
-}
-
-/* Media Queries para responsividad */
-@media screen and (max-width: 768px) {
-  .sidebar {
-    width: 100%; 
   }
-
-  .sidebar.active ~ .main-content {
-    margin-left: 0; 
-    position: absolute; 
-    left: 0;
-    width: 100%;
-    z-index: 0; /* El contenido principal se queda detrás del sidebar */
-  }
-}
