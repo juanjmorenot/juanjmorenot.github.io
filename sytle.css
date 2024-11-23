@@ -1,0 +1,171 @@
+*{
+  box-sizing: border-box;
+}
+
+html{scroll-behavior: smooth;}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+h1{font-size: 4em;}
+h2{font-size: 2.7em;}
+h3{font-size: 1.75em;}
+p{font-size: 1.5em;}
+ul{list-style: none;}
+li{font-size: 1.25em;}
+
+button{
+  font-size: 1.5em;
+  font-weight: bold;
+  font-style: bold;
+  padding: 10px 30px;
+  border-radius: 16px;
+  border: 1px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+  color: white;
+  background-color:tomato;
+}
+
+button:hover{
+  background-color:rgb(192, 58, 35);
+}
+
+.color-acento{
+  color: tomato;
+  font-family: "Grand Hotel", cursive;
+  font-style: normal;
+  margin: 0;
+  padding: 10px 10px;
+  font-weight: normal;
+  color: tomato;
+  font-size: 1.5em;
+}
+
+.container{
+  max-width: 1400px;
+  margin:auto;
+}
+
+header{
+  background-color: rgb(245,245,245);
+}
+
+header .logo{
+  font-family: "Grand Hotel", cursive;
+  font-style: normal;
+  margin: 0;
+  padding: 10px 10px;
+  font-weight: normal;
+  color: tomato;
+  font-size: 2.5em;
+}
+
+header .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header nav{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 25px;;
+}
+
+header a{
+  padding: 5px 12px;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+header a:hover{
+  color: rgb(192, 58, 35);
+}
+
+#hero{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 70vh;
+  color: white;;
+  background-image: linear-gradient(
+    0deg,
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+  ) ,url("media/pexels-valeria-ushakova-603898-3094219.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.bachetta-hero{
+  padding: 0;
+  margin: 0;
+}
+
+#somos-barchetta {
+  text-align: center;
+  padding: 200px 12px;
+}
+
+#nuestros-sabores{
+  background-color: rgb(30,30,30);
+}
+
+#nuestros-sabores{
+  text-align: center;
+  color: white;
+}
+
+#nuestros-sabores .container{
+  padding: 100px 12px;
+}
+
+#nuestros-sabores h2{
+  margin-top: 0;
+}
+
+#nuestros-sabores p{
+  display:none
+}
+
+#nuestros-sabores .carta{
+  background-position: center center;
+  background-size: cover;
+  padding: 50px 0px;
+  margin: 30px;
+  border-radius: 25px;
+}
+
+.carta:first-child{
+  background-image: linear-gradient(
+    0deg,
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+  )
+  ,url("media/gelato-1.jpeg")
+}
+
+.carta:nth-child(2){
+  background-image: linear-gradient(
+    0deg,
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+  )
+  ,url("media/gelato-2.webp")
+}
+
+.carta:nth-child(3){
+  background-image: linear-gradient(
+    0deg,
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+  )
+  ,url("media/pexels-photo-1346341.jpeg")
+}
