@@ -80,11 +80,11 @@ header a{
   text-decoration: none;
   font-weight: bold;
   color: black;
-  font-size: 50px;
+  font-size: 20px;
 }
 
 header a:hover{
-  color: rgb(192, 58, 35);
+  color: rgb(5, 5, 4);
 }
 
 #hero{
