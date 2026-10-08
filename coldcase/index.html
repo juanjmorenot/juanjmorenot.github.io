@@ -1,0 +1,117 @@
+<title>ColdCase</title>
+<style>
+/* Una sola pantalla de terminal para las dos divisiones del Buro:
+   cabecera ASCII, consola con scroll, diligencia y prompt anclados.
+   Tema unico deliberado: fosforo blanco sobre negro, con un unico
+   acento verde reservado al cierre de un caso. */
+:root{
+  --bg:#050506;
+  --fg:#d7d7d1;
+  --hi:#ffffff;
+  --dim:#8a8a85;
+  --faint:#4a4a48;
+  --line:#2a2a2c;
+  --good:#6ee79a;
+  --font-sys:"IBM Plex Mono","DejaVu Sans Mono",ui-monospace,monospace;
+  --font-crt:"VT323","IBM Plex Mono",monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--font-sys);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+#crt{position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.03) 0 1px,transparent 1px 3px);
+  mix-blend-mode:screen}
+#vig{position:fixed;inset:0;pointer-events:none;z-index:49;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.6) 100%)}
+#app{height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:0 16px}
+
+header{flex:0 0 auto;padding-block:10px 6px;border-bottom:1px solid var(--line)}
+.bannerwrap{overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.bannerwrap::-webkit-scrollbar{display:none}
+pre.banner{margin:0;font-family:var(--font-sys);font-size:clamp(5px,1.4vw,9px);line-height:1.08;
+  color:var(--hi);white-space:pre;text-shadow:0 0 6px rgba(255,255,255,.2)}
+.subtitle{font-family:var(--font-crt);font-size:17px;letter-spacing:.14em;color:var(--dim);
+  margin-top:6px;text-transform:uppercase}
+.status{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:8px;font-size:11px;color:var(--dim)}
+.chip{white-space:nowrap}
+.chip b{color:var(--hi);font-weight:600}
+.meter{color:var(--hi);letter-spacing:-.5px}
+
+#screen{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding-block:10px}
+#screen::-webkit-scrollbar{width:8px}
+#screen::-webkit-scrollbar-thumb{background:var(--line)}
+.ln{white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.5em}
+.ln.pre{white-space:pre;overflow-x:auto;overflow-y:hidden}
+.cmd{color:var(--hi)}
+.cmd .p{color:var(--dim)}
+.dim{color:var(--dim)}
+.faint{color:var(--faint)}
+.hi{color:var(--hi)}
+.th{color:var(--hi);font-weight:600}
+.ok{color:var(--hi);text-shadow:0 0 8px rgba(255,255,255,.35)}
+.good{color:var(--good);text-shadow:0 0 10px rgba(110,231,154,.3)}
+.err{color:var(--fg);border-left:2px solid var(--dim);padding-left:8px}
+.optrow{cursor:pointer}
+.optrow.sel{background:var(--hi);color:var(--bg);text-shadow:none}
+.optrow:hover{color:var(--hi)}
+
+.mission{flex:0 0 auto;border-top:1px solid var(--line);padding-block:7px;font-size:12px;
+  color:var(--dim);display:flex;gap:8px;align-items:flex-start}
+.mission b{color:var(--hi);font-weight:600;white-space:nowrap}
+.mission span{min-width:0}
+form#bar{flex:0 0 auto;display:flex;align-items:flex-start;gap:8px;border-top:1px solid var(--line);
+  padding-block:9px 4px;max-height:42vh;overflow-y:auto}
+#ps1{color:var(--dim);white-space:nowrap;font-size:12px;line-height:1.5;padding-top:1px}
+#ps1 b{color:var(--hi);font-weight:400}
+#entry{flex:1 1 auto;min-width:0;background:transparent;border:0;outline:none;color:var(--hi);
+  font:inherit;line-height:1.5;caret-color:var(--hi);padding:0;margin:0;
+  resize:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;height:1.5em}
+#bar:focus-within #ps1 b{text-shadow:0 0 8px rgba(255,255,255,.4)}
+#foot{flex:0 0 auto;font-size:10.5px;color:var(--faint);letter-spacing:.04em;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));
+  white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+#foot::-webkit-scrollbar{display:none}
+@media (max-width:460px){body{font-size:12px}.subtitle{font-size:15px;letter-spacing:.07em}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap">
+
+<div id="vig"></div><div id="crt"></div>
+
+<div id="app">
+  <header>
+    <div class="bannerwrap"><pre class="banner" id="banner">  ____ ___  _     ____     ____    _    ____  _____
+ / ___/ _ \| |   |  _ \   / ___|  / \  / ___|| ____|
+| |  | | | | |   | | | | | |     / _ \ \___ \|  _|
+| |__| |_| | |___| |_| | | |___ / ___ \ ___) | |___
+ \____\___/|_____|____/   \____/_/   \_\____/|_____|
+   C O L D   C A S E   B U R E A U  ·  S . A . P . D .</pre></div>
+    <div class="subtitle">South Angeles Police Department · Det. Juan Moreno · placa 1142</div>
+    <div class="status" id="status"></div>
+  </header>
+
+  <div id="screen" role="log" aria-live="polite" aria-label="Consola del Buro"></div>
+
+  <div class="mission" id="mission" hidden><b>&gt;&gt; EN CURSO:</b><span id="missiontext"></span></div>
+
+  <form id="bar" autocomplete="off">
+    <label id="ps1" for="entry"><b id="pwd">coldcase&gt;</b></label>
+    <textarea id="entry" name="entry" rows="1" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Consola"></textarea>
+  </form>
+  <div id="foot">ENTER ejecutar · ALT+ENTER salto de linea (SQL) · FLECHAS historial y listas · TAB autocompletar · ESC menu · CTRL+L limpiar · F1-F5 ayuda, glosario, reto, pista, investigacion · F6 sonido · divisiones</div>
+</div>
+
+<script src="shell.js"></script>
+<script src="cmd-fs.js"></script>
+<script src="cmd-glossary.js"></script>
+<script src="cmd-exercises.js"></script>
+<script src="cmd-engine.js"></script>
+<script src="sql-db.js"></script>
+<script src="sql-engine.js"></script>
+<script src="sql-glossary.js"></script>
+<script src="sql-retos.js"></script>
+<script src="sql-app.js"></script>
+<script>UI.start();</script>
